@@ -1,0 +1,32 @@
+[
+    {       
+        "short_name":"IPL",
+        "logo":"company/ipl_logo.jpg",
+        "title":"International Port & Logistics Pvt Ltd",
+        "address":"D-36, Block-2, Clifton, Karachi, Pakistan",
+        "phone":"+92-21-35878094-95-96",
+        "email":"info@bilal-group.com",
+        "contact_person":"-",
+        "ntn":"0803538-5"
+    },
+    {
+        "short_name":"BA",
+        "logo":"company/ba_logo.jpg",
+        "title":"Bilal Associates",
+        "address":"D-36, Block-2, Clifton, Karachi, Pakistan",
+        "phone":"+92-21-35878094-95-96",
+        "email":"info@bilal-group.com",
+        "contact_person":"-",
+        "ntn":"8233682-5"
+    },
+    {
+        "short_name":"BAPL",
+        "logo":"company/bapl_logo.jpg",
+        "title":"Bilal Associates (Pvt) Ltd",
+        "address":"D-36, Block-2, Clifton, Karachi, Pakistan",
+        "phone":"+92-21-35878094-95-96",
+        "email":"info@bilal-group.com",
+        "contact_person":"-",
+        "ntn":"0658182-0"
+    }
+]

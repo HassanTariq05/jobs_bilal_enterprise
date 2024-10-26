@@ -1,0 +1,10 @@
+[
+    {
+        "user_id":2,
+        "title":"Bay west (pvt) lts",
+        "location":"Bay west diesel tank",
+        "capacity":"40000",
+        "remarks":"remarks 1",
+        "fuel_type_id":1
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {       
+        "name":"Customer 1",
+        "email":"customer1@gmail.com",
+        "contact": "03451234567"
+    },
+    {
+        "name":"Customer 2",
+        "email":"customer2@gmail.com",
+        "contact": "03451234567"
+    }
+]

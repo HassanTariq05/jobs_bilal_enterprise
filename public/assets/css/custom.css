@@ -1,0 +1,135 @@
+/**
+ *
+ * You can write your CSS code here, DO NOT touch the default JavaScript file
+ * because it will make it harder for you to update.
+ * 
+ */
+
+/*# sourceMappingURL=custom.css.map */
+
+.card .card-header{
+    min-height: auto !important;
+    padding: 10px 25px;
+    display: block !important;
+}
+
+.cursor-pointer{
+    cursor: pointer !important;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.card .card-header, .card .card-body, .card .card-footer {
+    padding: 15px 20px;
+}
+
+.main-sidebar .sidebar-menu li ul.dropdown-menu li.active a:hover,
+.main-sidebar .sidebar-menu li ul.dropdown-menu li a:hover,
+.main-sidebar .sidebar-menu li a{
+    color:#fff !important;
+}
+
+
+.main-sidebar .sidebar-menu li a:hover,
+.main-sidebar .sidebar-menu li ul.dropdown-menu li.active > a{
+    color:#6777ef !important;
+}
+
+
+.image-preview, #callback-preview{
+    width: 200px important;
+    height: 200px important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: url(../img/no-image.png);
+}
+
+.cancelled{
+    width: 200px important;
+    height: 200px important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background: url(../img/cancelled.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.x-small-thumbnail{
+    width: 50px;
+}
+
+.image-preview label, #callback-preview label{
+    background-color: #444444 !important;
+}
+
+.hide{
+    display: none !important;
+}
+
+table.dataTable, 
+table.data-table{
+    width: 100% !important;
+}
+.dt-search,
+.dt-paging
+{
+    float: right !important;
+}
+.dataTable,
+.dt-buttons{
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+}
+.dt-input{margin-right: 10px !important;}
+.dt-info{
+    float: left !important;
+    margin-top: 10px !important;
+}
+
+.dt-buttons{
+    text-align: center !important;
+}
+.dt-button
+{
+    border: 1px solid !important;
+    padding: 3px 10px !important;
+    margin: 2px 5px !important;
+    cursor: pointer !important;
+}
+.dt-button:hover
+{
+    border: 1px solid #6777ef !important;
+    background-color: #6777ef !important;
+    color: #fff !important;
+}
+
+
+.table-invoice td,
+.table-invoice th
+{
+    height: 20px !important;
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+}
+
+td.border{
+    border: 1px solid #000 !important;
+}
+td.nop{
+    padding: 0px !important;
+}
+
+.select2-results__option {
+    padding: 6px 10px !important;
+    line-height: 18px !important;
+}
+
+
+
+
+
+

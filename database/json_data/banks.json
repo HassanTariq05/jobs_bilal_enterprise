@@ -1,0 +1,31 @@
+[
+    {
+        "title":"Meezan Bank Ltd",
+        "short_name":"mzl",
+        "address":"PECHS",
+        "email":"info@meezan-bank.com",
+        "contact":"0321-3445566",
+        "contact_person":"Mehroom Khan"
+    },
+    {
+        "title":"Habib Bank Ltd",
+        "short_name":"hbl",
+        "address":"Tariq Road",
+        "email":"info@hbl.com",
+        "contact":"0321-3445565",
+        "contact_person":"Hussain Habib"
+    },
+    {
+        "title":"Standard Chartered Bank",
+        "short_name":"st",
+        "address":"Clifton",
+        "email":"info@st.com.pk",
+        "contact":"0321-3445564",
+        "contact_person":"Burhan Bashir"
+    }
+]
+
+
+
+
+

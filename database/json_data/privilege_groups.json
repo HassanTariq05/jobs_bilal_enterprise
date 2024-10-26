@@ -1,0 +1,213 @@
+
+[
+    {       
+        "privilege_category_id": 1,
+        "title":"Account Nature",
+        "order_by":1
+    },
+    {
+        "privilege_category_id": 1,
+        "title":"Chart of Account",
+        "order_by":2
+    },
+    {
+        "privilege_category_id": 1,
+        "title":"Payment Mode",
+        "order_by":3
+    },
+    {
+        "privilege_category_id": 1,
+        "title":"Bank Account",
+        "order_by":4
+    },
+    {
+        "privilege_category_id": 1,
+        "title":"Bank",
+        "order_by":5
+    },
+    {
+        "privilege_category_id": 2,
+        "title":"Job Bill",
+        "order_by":6
+    },
+    {
+        "privilege_category_id": 2,
+        "title":"Job Bill Detail",
+        "order_by":7
+    },
+    {
+        "privilege_category_id": 2,
+        "title":"Job Bill File",
+        "order_by":8
+    },
+    {
+        "privilege_category_id": 2,
+        "title":"Job Bill Payment",
+        "order_by":9
+    },
+    {
+        "privilege_category_id": 2,
+        "title":"Job Bill Payment Detail",
+        "order_by":10
+    },
+    {
+        "privilege_category_id": 2,
+        "title":"Job Container",
+        "order_by":11
+    },
+    {
+        "privilege_category_id": 2,
+        "title":"Job",
+        "order_by":12
+    },
+    {
+        "privilege_category_id": 2,
+        "title":"Job File",
+        "order_by":13
+    },
+    {
+        "privilege_category_id": 2,
+        "title":"Job Invoice",
+        "order_by":14
+    },
+    {
+        "privilege_category_id": 2,
+        "title":"Job Invoice Detail",
+        "order_by":15
+    },
+    {
+        "privilege_category_id": 2,
+        "title":"Job Invoice File",
+        "order_by":16
+    },
+    {
+        "privilege_category_id": 2,
+        "title":"Job Invoice Receipt",
+        "order_by":17
+    },
+    {
+        "privilege_category_id": 2,
+        "title":"Job Invoice Receipt Detail",
+        "order_by":18
+    },
+    {
+        "privilege_category_id": 3,
+        "title":"Fuel",
+        "order_by":19
+    },
+    {
+        "privilege_category_id": 3,
+        "title":"Fuel Issue",
+        "order_by":20
+    },
+    {
+        "privilege_category_id": 3,
+        "title":"Fuel Purchase",
+        "order_by":21
+    },
+    {
+        "privilege_category_id": 4,
+        "title":"User",
+        "order_by":22
+    },
+    {
+        "privilege_category_id": 4,
+        "title":"Designation",
+        "order_by":23
+    },
+    {
+        "privilege_category_id": 4,
+        "title":"User Role",
+        "order_by":24
+    },
+    {
+        "privilege_category_id": 4,
+        "title":"Role Privileges",
+        "order_by":25
+    },    
+    {
+        "privilege_category_id": 5,
+        "title":"Fleet",
+        "order_by":26
+    },
+    {
+        "privilege_category_id": 6,
+        "title":"Location",
+        "order_by":27
+    },
+    {
+        "privilege_category_id": 6,
+        "title":"Operation",
+        "order_by":28
+    },
+    {
+        "privilege_category_id": 6,
+        "title":"Fuel Type",
+        "order_by":29
+    },
+    {
+        "privilege_category_id": 6,
+        "title":"Project",
+        "order_by":30
+    },
+    {
+        "privilege_category_id": 6,
+        "title":"Job Type",
+        "order_by":31
+    },
+    {
+        "privilege_category_id": 6,
+        "title":"Sales Tax Territory",
+        "order_by":32
+    },
+    {
+        "privilege_category_id": 6,
+        "title":"Company",
+        "order_by":33
+    },
+    {
+        "privilege_category_id": 6,
+        "title":"Party",
+        "order_by":34
+    },
+    {
+        "privilege_category_id": 6,
+        "title":"Party Type",
+        "order_by":35
+    },
+    {
+        "privilege_category_id": 6,
+        "title":"Tank",
+        "order_by":36
+    },
+    {
+        "privilege_category_id": 6,
+        "title":"User Status",
+        "order_by":37
+    },
+    {
+        "privilege_category_id": 6,
+        "title":"Fleet Type",
+        "order_by":38
+    },
+    {
+        "privilege_category_id": 6,
+        "title":"Fleet Manufacturer",
+        "order_by":39
+    },
+    {
+        "privilege_category_id": 6,
+        "title":"Job Status",
+        "order_by":40
+    },
+    {
+        "privilege_category_id": 7,
+        "title":"Reporting",
+        "order_by":41
+    },
+    {
+        "privilege_category_id": 2,
+        "title":"Job Performance",
+        "order_by":42
+    }
+]
