@@ -1,0 +1,42 @@
+[
+    {
+        "designation_id":"1",
+        "status_id":"2",
+        "name":"Bilal Shahid",
+        "email":"bilal@bilal-group.com",
+        "report_to":1,
+        "remarks":"this is a test user."
+    },
+    {
+        "designation_id":"2",
+        "status_id":"2",
+        "report_to":"1",
+        "name":"Umer Shahid",
+        "email":"umer@bilal-group.com",
+        "remarks":"this is a test user."
+    },
+    {
+        "designation_id":"2",
+        "status_id":"2",
+        "report_to":"2",
+        "name":"User1",
+        "email":"user1@bilal-group.com",
+        "remarks":"this is a test user."
+    },
+    {
+        "designation_id":"2",
+        "status_id":"2",
+        "report_to":"2",
+        "name":"User2",
+        "email":"user2@bilal-group.com",
+        "remarks":"this is a test user."
+    },
+    {
+        "designation_id":"2",
+        "status_id":"2",
+        "report_to":"2",
+        "name":"User3",
+        "email":"user3@bilal-group.com",
+        "remarks":"this is a test user."
+    }
+]

@@ -1,0 +1,57 @@
+[
+    {
+        "title":"Fork Lifters",
+        "slug":"fork-lifters",
+        "image":""
+    },
+    {
+        "title":"Suzuki",
+        "slug":"suzuki",
+        "image":""
+    },
+    {
+        "title":"Mechanical Crane",
+        "slug":"mechanical-crane",
+        "image":""
+    },
+    {
+        "title":"Trailer",
+        "slug":"trailer",
+        "image":""
+    },
+    {
+        "title":"Shahzor",
+        "slug":"shahzor",
+        "image":""
+    },
+    {
+        "title":"Reach Stacker",
+        "slug":"reach-stacker",
+        "image":""
+    },
+    {
+        "title":"Empty Handler",
+        "slug":"empty-handler",
+        "image":""
+    },
+    {
+        "title":"Electric Lifters",
+        "slug":"electric-lifters",
+        "image":""
+    },
+    {
+        "title":"Mazda",
+        "slug":"mazda",
+        "image":""
+    },
+    {
+        "title":"Oil Tanker",
+        "slug":"oil-tanker",
+        "image":""
+    },
+    {
+        "title":"Hydraulic Crane",
+        "slug":"hydraulic-crane",
+        "image":""
+    }
+]

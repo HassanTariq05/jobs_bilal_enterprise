@@ -1,0 +1,1745 @@
+[
+    {
+        "privilege_group_id": 1,
+        "title": "View Account Nature",
+        "slug": "view-account-nature",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 1,
+        "title": "Add Account Nature",
+        "slug": "add-account-nature",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 1,
+        "title": "Edit Account Nature",
+        "slug": "edit-account-nature",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 1,
+        "title": "Delete Account Nature",
+        "slug": "delete-account-nature",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 1,
+        "title": "Restore Account Nature",
+        "slug": "restore-account-nature",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 1,
+        "title": "Destroy Account Nature",
+        "slug": "destroy-account-nature",
+        "short_title": "Destroy",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 2,
+        "title": "View Chart of Account",
+        "slug": "view-chart-of-account",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 2,
+        "title": "Add Chart of Account",
+        "slug": "add-chart-of-account",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 2,
+        "title": "Edit Chart of Account",
+        "slug": "edit-chart-of-account",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 2,
+        "title": "Delete Chart of Account",
+        "slug": "delete-chart-of-account",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 2,
+        "title": "Restore Chart of Account",
+        "slug": "restore-chart-of-account",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 2,
+        "title": "Destroy Chart of Account",
+        "slug": "destroy-chart-of-account",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 3,
+        "title": "View Payment Mode",
+        "slug": "view-payment-mode",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 3,
+        "title": "Add Payment Mode",
+        "slug": "add-payment-mode",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 3,
+        "title": "Edit Payment Mode",
+        "slug": "edit-payment-mode",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 3,
+        "title": "Delete Payment Mode",
+        "slug": "delete-payment-mode",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 3,
+        "title": "Restore Payment Mode",
+        "slug": "restore-payment-mode",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 3,
+        "title": "Destroy Payment Mode",
+        "slug": "destroy-payment-mode",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 4,
+        "title": "View Bank Account",
+        "slug": "view-bank-account",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 4,
+        "title": "Add Bank Account",
+        "slug": "add-bank-account",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 4,
+        "title": "Edit Bank Account",
+        "slug": "edit-bank-account",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 4,
+        "title": "Delete Bank Account",
+        "slug": "delete-bank-account",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 4,
+        "title": "Restore Bank Account",
+        "slug": "restore-bank-account",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 4,
+        "title": "Destroy Bank Account",
+        "slug": "destroy-bank-account",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 5,
+        "title": "View Bank",
+        "slug": "view-bank",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 5,
+        "title": "Add Bank",
+        "slug": "add-bank",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 5,
+        "title": "Edit Bank",
+        "slug": "edit-bank",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 5,
+        "title": "Delete Bank",
+        "slug": "delete-bank",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 5,
+        "title": "Restore Bank",
+        "slug": "restore-bank",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 5,
+        "title": "Destroy Bank",
+        "slug": "destroy-bank",
+        "short_title": "Destroy",
+        "order_by": 5
+    },    
+    {
+        "privilege_group_id": 6,
+        "title": "View Job Bill",
+        "slug": "view-job-bill",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 6,
+        "title": "Add Job Bill",
+        "slug": "add-job-bill",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 6,
+        "title": "Edit Job Bill",
+        "slug": "edit-job-bill",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 6,
+        "title": "Delete Job Bill",
+        "slug": "delete-job-bill",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 6,
+        "title": "Restore Job Bill",
+        "slug": "restore-job-bill",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 6,
+        "title": "Destroy Job Bill",
+        "slug": "destroy-job-bill",
+        "short_title": "Destroy",
+        "order_by": 5
+    },    
+    {
+        "privilege_group_id": 7,
+        "title": "View Job Bill Detail",
+        "slug": "view-job-bill-detail",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 7,
+        "title": "Add Job Bill Detail",
+        "slug": "add-job-bill-detail",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 7,
+        "title": "Edit Job Bill Detail",
+        "slug": "edit-job-bill-detail",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 7,
+        "title": "Delete Job Bill Detail",
+        "slug": "delete-job-bill-detail",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 7,
+        "title": "Restore Job Bill Detail",
+        "slug": "restore-job-bill-detail",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 7,
+        "title": "Destroy Job Bill Detail",
+        "slug": "destroy-job-bill-detail",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 8,
+        "title": "View Job Bill File",
+        "slug": "view-job-bill-file",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 8,
+        "title": "Add Job Bill File",
+        "slug": "add-job-bill-file",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 8,
+        "title": "Edit Job Bill File",
+        "slug": "edit-job-bill-file",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 8,
+        "title": "Delete Job Bill File",
+        "slug": "delete-job-bill-file",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 8,
+        "title": "Restore Job Bill File",
+        "slug": "restore-job-bill-file",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 8,
+        "title": "Destroy Job Bill File",
+        "slug": "destroy-job-bill-file",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 9,
+        "title": "View Job Bill Payment",
+        "slug": "view-job-bill-payment",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 9,
+        "title": "Add Job Bill Payment",
+        "slug": "add-job-bill-payment",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 9,
+        "title": "Edit Job Bill Payment",
+        "slug": "edit-job-bill-payment",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 9,
+        "title": "Delete Job Bill Payment",
+        "slug": "delete-job-bill-payment",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 9,
+        "title": "Restore Job Bill Payment",
+        "slug": "restore-job-bill-payment",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 9,
+        "title": "Destroy Job Bill Payment",
+        "slug": "destroy-job-bill-payment",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 10,
+        "title": "View Job Bill Payment Detail",
+        "slug": "view-job-bill-payment-detail",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 10,
+        "title": "Add Job Bill Payment Detail",
+        "slug": "add-job-bill-payment-detail",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 10,
+        "title": "Edit Job Bill Payment Detail",
+        "slug": "edit-job-bill-payment-detail",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 10,
+        "title": "Delete Job Bill Payment Detail",
+        "slug": "delete-job-bill-payment-detail",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 10,
+        "title": "Restore Job Bill Payment Detail",
+        "slug": "restore-job-bill-payment-detail",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 10,
+        "title": "Destroy Job Bill Payment Detail",
+        "slug": "destroy-job-bill-payment-detail",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 11,
+        "title": "View Job Container",
+        "slug": "view-job-container",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 11,
+        "title": "Add Job Container",
+        "slug": "add-job-container",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 11,
+        "title": "Edit Job Container",
+        "slug": "edit-job-container",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 11,
+        "title": "Delete Job Container",
+        "slug": "delete-job-container",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 11,
+        "title": "Restore Job Container",
+        "slug": "restore-job-container",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 11,
+        "title": "Destroy Job Container",
+        "slug": "destroy-job-container",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 12,
+        "title": "View Job",
+        "slug": "view-job",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 12,
+        "title": "Add Job",
+        "slug": "add-job",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 12,
+        "title": "Edit Job",
+        "slug": "edit-job",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 12,
+        "title": "Delete Job",
+        "slug": "delete-job",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 12,
+        "title": "Restore Job",
+        "slug": "restore-job",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 12,
+        "title": "Destroy Job",
+        "slug": "destroy-job",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 13,
+        "title": "View Job File",
+        "slug": "view-job-file",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 13,
+        "title": "Add Job File",
+        "slug": "add-job-file",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 13,
+        "title": "Edit Job File",
+        "slug": "edit-job-file",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 13,
+        "title": "Delete Job File",
+        "slug": "delete-job-file",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 13,
+        "title": "Restore Job File",
+        "slug": "restore-job-file",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 13,
+        "title": "Destroy Job File",
+        "slug": "destroy-job-file",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 14,
+        "title": "View Job Invoice",
+        "slug": "view-job-invoice",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 14,
+        "title": "Add Job Invoice",
+        "slug": "add-job-invoice",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 14,
+        "title": "Edit Job Invoice",
+        "slug": "edit-job-invoice",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 14,
+        "title": "Delete Job Invoice",
+        "slug": "delete-job-invoice",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 14,
+        "title": "Restore Job Invoice",
+        "slug": "restore-job-invoice",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 14,
+        "title": "Destroy Job Invoice",
+        "slug": "destroy-job-invoice",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 15,
+        "title": "View Job Invoice Detail",
+        "slug": "view-job-invoice-detail",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 15,
+        "title": "Add Job Invoice Detail",
+        "slug": "add-job-invoice-detail",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 15,
+        "title": "Edit Job Invoice Detail",
+        "slug": "edit-job-invoice-detail",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 15,
+        "title": "Delete Job Invoice Detail",
+        "slug": "delete-job-invoice-detail",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 15,
+        "title": "Restore Job Invoice Detail",
+        "slug": "restore-job-invoice-detail",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 15,
+        "title": "Destroy Job Invoice Detail",
+        "slug": "destroy-job-invoice-detail",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 16,
+        "title": "View Job Invoice File",
+        "slug": "view-job-invoice-file",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 16,
+        "title": "Add Job Invoice File",
+        "slug": "add-job-invoice-file",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 16,
+        "title": "Edit Job Invoice File",
+        "slug": "edit-job-invoice-file",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 16,
+        "title": "Delete Job Invoice File",
+        "slug": "delete-job-invoice-file",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 16,
+        "title": "Restore Job Invoice File",
+        "slug": "restore-job-invoice-file",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 16,
+        "title": "Destroy Job Invoice File",
+        "slug": "destroy-job-invoice-file",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 17,
+        "title": "View Job Invoice Receipt",
+        "slug": "view-job-invoice-receipt",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 17,
+        "title": "Add Job Invoice Receipt",
+        "slug": "add-job-invoice-receipt",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 17,
+        "title": "Edit Job Invoice Receipt",
+        "slug": "edit-job-invoice-receipt",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 17,
+        "title": "Delete Job Invoice Receipt",
+        "slug": "delete-job-invoice-receipt",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 17,
+        "title": "Restore Job Invoice Receipt",
+        "slug": "restore-job-invoice-receipt",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 17,
+        "title": "Destroy Job Invoice Receipt",
+        "slug": "destroy-job-invoice-receipt",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 18,
+        "title": "View Job Invoice Receipt Detail",
+        "slug": "view-job-invoice-receipt-detail",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 18,
+        "title": "Add Job Invoice Receipt Detail",
+        "slug": "add-job-invoice-receipt-detail",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 18,
+        "title": "Edit Job Invoice Receipt Detail",
+        "slug": "edit-job-invoice-receipt-detail",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 18,
+        "title": "Delete Job Invoice Receipt Detail",
+        "slug": "delete-job-invoice-receipt-detail",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 18,
+        "title": "Restore Job Invoice Receipt Detail",
+        "slug": "restore-job-invoice-receipt-detail",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 18,
+        "title": "Destroy Job Invoice Receipt Detail",
+        "slug": "destroy-job-invoice-receipt-detail",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 19,
+        "title": "View Fuel",
+        "slug": "view-fuel",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 19,
+        "title": "Add Fuel",
+        "slug": "add-fuel",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 19,
+        "title": "Edit Fuel",
+        "slug": "edit-fuel",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 19,
+        "title": "Delete Fuel",
+        "slug": "delete-fuel",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 19,
+        "title": "Restore Fuel",
+        "slug": "restore-fuel",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 19,
+        "title": "Destroy Fuel",
+        "slug": "destroy-fuel",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 20,
+        "title": "View Fuel Issue",
+        "slug": "view-fuel-issue",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 20,
+        "title": "Add Fuel Issue",
+        "slug": "add-fuel-issue",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 20,
+        "title": "Edit Fuel Issue",
+        "slug": "edit-fuel-issue",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 20,
+        "title": "Delete Fuel Issue",
+        "slug": "delete-fuel-issue",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 20,
+        "title": "Restore Fuel Issue",
+        "slug": "restore-fuel-issue",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 20,
+        "title": "Destroy Fuel Issue",
+        "slug": "destroy-fuel-issue",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 21,
+        "title": "View Fuel Purchase",
+        "slug": "view-fuel-purchase",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 21,
+        "title": "Add Fuel Purchase",
+        "slug": "add-fuel-purchase",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 21,
+        "title": "Edit Fuel Purchase",
+        "slug": "edit-fuel-purchase",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 21,
+        "title": "Delete Fuel Purchase",
+        "slug": "delete-fuel-purchase",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 21,
+        "title": "Restore Fuel Purchase",
+        "slug": "restore-fuel-purchase",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 21,
+        "title": "Destroy Fuel Purchase",
+        "slug": "destroy-fuel-purchase",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 22,
+        "title": "View User",
+        "slug": "view-user",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 22,
+        "title": "Add User",
+        "slug": "add-user",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 22,
+        "title": "Edit User",
+        "slug": "edit-user",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 22,
+        "title": "Delete User",
+        "slug": "delete-user",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 22,
+        "title": "Restore User",
+        "slug": "restore-user",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 22,
+        "title": "Destroy User",
+        "slug": "destroy-user",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 23,
+        "title": "View Designation",
+        "slug": "view-designation",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 23,
+        "title": "Add Designation",
+        "slug": "add-designation",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 23,
+        "title": "Edit Designation",
+        "slug": "edit-designation",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 23,
+        "title": "Delete Designation",
+        "slug": "delete-designation",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 23,
+        "title": "Restore Designation",
+        "slug": "restore-designation",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 23,
+        "title": "Destroy Designation",
+        "slug": "destroy-designation",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 24,
+        "title": "View Role",
+        "slug": "view-role",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 24,
+        "title": "Add Role",
+        "slug": "add-role",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 24,
+        "title": "Edit Role",
+        "slug": "edit-role",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 24,
+        "title": "Delete Role",
+        "slug": "delete-role",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 24,
+        "title": "Restore User Role",
+        "slug": "restore-user-role",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 24,
+        "title": "Destroy User Role",
+        "slug": "destroy-user-role",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 25,
+        "title": "View Role Privilege",
+        "slug": "view-role-privilege",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 25,
+        "title": "Add Role Privilege",
+        "slug": "add-role-privilege",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 25,
+        "title": "Edit Role Privilege",
+        "slug": "edit-role-privilege",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 25,
+        "title": "Delete Role Privilege",
+        "slug": "delete-role-privilege",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 26,
+        "title": "View Fleet",
+        "slug": "view-fleet",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 26,
+        "title": "Add Fleet",
+        "slug": "add-fleet",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 26,
+        "title": "Edit Fleet",
+        "slug": "edit-fleet",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 26,
+        "title": "Delete Fleet",
+        "slug": "delete-fleet",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 26,
+        "title": "Restore Fleet",
+        "slug": "restore-fleet",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 26,
+        "title": "Destroy Fleet",
+        "slug": "destroy-fleet",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 27,
+        "title": "View Location",
+        "slug": "view-location",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 27,
+        "title": "Add Location",
+        "slug": "add-location",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 27,
+        "title": "Edit Location",
+        "slug": "edit-location",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 27,
+        "title": "Delete Location",
+        "slug": "delete-location",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 27,
+        "title": "Restore Location",
+        "slug": "restore-location",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 27,
+        "title": "Destroy Location",
+        "slug": "destroy-location",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 28,
+        "title": "View Operation",
+        "slug": "view-operation",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 28,
+        "title": "Add Operation",
+        "slug": "add-operation",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 28,
+        "title": "Edit Operation",
+        "slug": "edit-operation",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 28,
+        "title": "Delete Operation",
+        "slug": "delete-operation",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 28,
+        "title": "Restore Operation",
+        "slug": "restore-operation",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 28,
+        "title": "Destroy Operation",
+        "slug": "destroy-operation",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 29,
+        "title": "View Fuel Type",
+        "slug": "view-fuel-type",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 29,
+        "title": "Add Fuel Type",
+        "slug": "add-fuel-type",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 29,
+        "title": "Edit Fuel Type",
+        "slug": "edit-fuel-type",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 29,
+        "title": "Delete Fuel Type",
+        "slug": "delete-fuel-type",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 29,
+        "title": "Restore Fuel Type",
+        "slug": "restore-fuel-type",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 29,
+        "title": "Destroy Fuel Type",
+        "slug": "destroy-fuel-type",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 30,
+        "title": "View Project",
+        "slug": "view-project",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 30,
+        "title": "Add Project",
+        "slug": "add-project",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 30,
+        "title": "Edit Project",
+        "slug": "edit-project",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 30,
+        "title": "Delete Project",
+        "slug": "delete-project",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 30,
+        "title": "Restore Project",
+        "slug": "restore-project",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 30,
+        "title": "Destroy Project",
+        "slug": "destroy-project",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 31,
+        "title": "View Job Type",
+        "slug": "view-job-type",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 31,
+        "title": "Add Job Type",
+        "slug": "add-job-type",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 31,
+        "title": "Edit Job Type",
+        "slug": "edit-job-type",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 31,
+        "title": "Delete Job Type",
+        "slug": "delete-job-type",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 31,
+        "title": "Restore Job Type",
+        "slug": "restore-job-type",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 31,
+        "title": "Destroy Job Type",
+        "slug": "destroy-job-type",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 32,
+        "title": "View Sales Tax Territory",
+        "slug": "view-sales-tax-territory",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 32,
+        "title": "Add Sales Tax Territory",
+        "slug": "add-sales-tax-territory",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 32,
+        "title": "Edit Sales Tax Territory",
+        "slug": "edit-sales-tax-territory",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 32,
+        "title": "Delete Sales Tax Territory",
+        "slug": "delete-sales-tax-territory",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 32,
+        "title": "Restore Sales Tax Territory",
+        "slug": "restore-sales-tax-territory",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 32,
+        "title": "Destroy Sales Tax Territory",
+        "slug": "destroy-sales-tax-territory",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 33,
+        "title": "View Company",
+        "slug": "view-company",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 33,
+        "title": "Add Company",
+        "slug": "add-company",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 33,
+        "title": "Edit Company",
+        "slug": "edit-company",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 33,
+        "title": "Delete Company",
+        "slug": "delete-company",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 33,
+        "title": "Restore Company",
+        "slug": "restore-company",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 33,
+        "title": "Destroy Company",
+        "slug": "destroy-company",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 34,
+        "title": "View Party",
+        "slug": "view-party",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 34,
+        "title": "Add Party",
+        "slug": "add-party",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 34,
+        "title": "Edit Party",
+        "slug": "edit-party",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 34,
+        "title": "Delete Party",
+        "slug": "delete-party",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 34,
+        "title": "Restore Party",
+        "slug": "restore-party",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 34,
+        "title": "Destroy Party",
+        "slug": "destroy-party",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 35,
+        "title": "View Party Type",
+        "slug": "view-party-type",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 35,
+        "title": "Add Party Type",
+        "slug": "add-party-type",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 35,
+        "title": "Edit Party Type",
+        "slug": "edit-party-type",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 35,
+        "title": "Delete Party Type",
+        "slug": "delete-party-type",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 35,
+        "title": "Restore Party Type",
+        "slug": "restore-party-type",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 35,
+        "title": "Destroy Party Type",
+        "slug": "destroy-party-type",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 36,
+        "title": "View Tank",
+        "slug": "view-tank",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 36,
+        "title": "Add Tank",
+        "slug": "add-tank",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 36,
+        "title": "Edit Tank",
+        "slug": "edit-tank",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 36,
+        "title": "Delete Tank",
+        "slug": "delete-tank",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 36,
+        "title": "Restore Tank",
+        "slug": "restore-tank",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 36,
+        "title": "Destroy Tank",
+        "slug": "destroy-tank",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 37,
+        "title": "View User Status",
+        "slug": "view-user-status",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 37,
+        "title": "Add User Status",
+        "slug": "add-user-status",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 37,
+        "title": "Edit User Status",
+        "slug": "edit-user-status",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 37,
+        "title": "Delete User Status",
+        "slug": "delete-user-status",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 37,
+        "title": "Restore User Status",
+        "slug": "restore-user-status",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 37,
+        "title": "Destroy User Status",
+        "slug": "destroy-user-status",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 38,
+        "title": "View Fleet Type",
+        "slug": "view-fleet-type",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 38,
+        "title": "Add Fleet Type",
+        "slug": "add-fleet-type",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 38,
+        "title": "Edit Fleet Type",
+        "slug": "edit-fleet-type",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 38,
+        "title": "Delete Fleet Type",
+        "slug": "delete-fleet-type",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 38,
+        "title": "Restore Fleet Type",
+        "slug": "restore-fleet-type",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 38,
+        "title": "Destroy Fleet Type",
+        "slug": "destroy-fleet-type",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 39,
+        "title": "View Fleet Manufacturer",
+        "slug": "view-fleet-manufacturer",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 39,
+        "title": "Add Fleet Manufacturer",
+        "slug": "add-fleet-manufacturer",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 39,
+        "title": "Edit Fleet Manufacturer",
+        "slug": "edit-fleet-manufacturer",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 39,
+        "title": "Delete Fleet Manufacturer",
+        "slug": "delete-fleet-manufacturer",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 39,
+        "title": "Restore Fleet Manufacturer",
+        "slug": "restore-fleet-manufacturer",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 39,
+        "title": "Destroy Fleet Manufacturer",
+        "slug": "destroy-fleet-manufacturer",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 40,
+        "title": "View Job Status",
+        "slug": "view-job-status",
+        "short_title": "View",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 40,
+        "title": "Add Job Status",
+        "slug": "add-job-status",
+        "short_title": "Add",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 40,
+        "title": "Edit Job Status",
+        "slug": "edit-job-status",
+        "short_title": "Edit",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 40,
+        "title": "Delete Job Status",
+        "slug": "delete-job-status",
+        "short_title": "Delete",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 40,
+        "title": "Restore Job Status",
+        "slug": "restore-job-status",
+        "short_title": "Restore",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 40,
+        "title": "Destroy Job Status",
+        "slug": "destroy-job-status",
+        "short_title": "Destroy",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 41,
+        "title": "Customer Ledger",
+        "slug": "customer-ledger",
+        "short_title": "Customer Ledger",
+        "order_by": 1
+    },
+    {
+        "privilege_group_id": 41,
+        "title": "Vendor Ledger",
+        "slug": "vendor-ledger",
+        "short_title": "Vendor Ledger",
+        "order_by": 2
+    },
+    {
+        "privilege_group_id": 41,
+        "title": "Bank Ledger",
+        "slug": "bank-ledger",
+        "short_title": "Bank Ledger",
+        "order_by": 3
+    },
+    {
+        "privilege_group_id": 41,
+        "title": "General Ledger",
+        "slug": "general-ledger",
+        "short_title": "General Ledger",
+        "order_by": 4
+    },
+    {
+        "privilege_group_id": 41,
+        "title": "Transaction List",
+        "slug": "transaction-list",
+        "short_title": "Transaction List",
+        "order_by": 5
+    },
+    {
+        "privilege_group_id": 41,
+        "title": "Collection Report",
+        "slug": "collection-report",
+        "short_title": "Collection Report",
+        "order_by": 6
+    },
+    {
+        "privilege_group_id": 41,
+        "title": "Adjustment",
+        "slug": "adjustment",
+        "short_title": "Adjustment",
+        "order_by": 7
+    },
+    {
+        "privilege_group_id": 41,
+        "title": "Job wise PnL",
+        "slug": "job-wise-pnl",
+        "short_title": "Job wise PnL",
+        "order_by": 8
+    },
+    {
+        "privilege_group_id": 41,
+        "title": "Customers List",
+        "slug": "customers-list",
+        "short_title": "Customers List",
+        "order_by": 9
+    },
+    {
+        "privilege_group_id": 41,
+        "title": "Vendors List",
+        "slug": "vendors-list",
+        "short_title": "Vendors List",
+        "order_by": 10
+    },
+    {
+        "privilege_group_id": 42,
+        "title": "Upload Excel Sheet",
+        "slug": "upload-excel-sheet",
+        "short_title": "Upload Excel Sheet",
+        "order_by": 11
+    }                                         
+]

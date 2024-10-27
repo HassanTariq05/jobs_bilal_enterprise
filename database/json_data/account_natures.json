@@ -1,0 +1,26 @@
+[
+    {       
+        "title":"Assets",
+        "code":"0001"
+    },
+    {
+        "title":"Liabilities",
+        "code":"5000"
+    },
+    {
+        "title":"Equity",
+        "code":"10000"
+    },
+    {
+        "title":"Revenues",
+        "code":"15000"
+    },
+    {
+        "title":"Expenses",
+        "code":"20000"
+    },
+    {
+        "title":"Income",
+        "code":"25000"
+    }
+]

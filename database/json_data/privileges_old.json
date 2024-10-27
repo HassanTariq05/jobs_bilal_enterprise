@@ -1,0 +1,1070 @@
+[
+    {       
+        "privilege_group_id": 1,
+        "title":"View Account Nature",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 1,
+        "title":"Add Account Nature",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 1,
+        "title":"Edit Account Nature",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 1,
+        "title":"Delete Account Nature",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 2,
+        "title":"View Chart of Account",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 2,
+        "title":"Add Chart of Account",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 2,
+        "title":"Edit Chart of Account",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 2,
+        "title":"Delete Chart of Account",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 3,
+        "title":"View Payment Mode",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 3,
+        "title":"Add Payment Mode",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 3,
+        "title":"Edit Payment Mode",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 3,
+        "title":"Delete Payment Mode",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 4,
+        "title":"View Bank Account",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 4,
+        "title":"Add Bank Account",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 4,
+        "title":"Edit Bank Account",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 4,
+        "title":"Delete Bank Account",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 5,
+        "title":"View Bank",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 5,
+        "title":"Add Bank",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 5,
+        "title":"Edit Bank",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 5,
+        "title":"Delete Bank",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 6,
+        "title":"View Job Bill",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 6,
+        "title":"Add Job Bill",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 6,
+        "title":"Edit Job Bill",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 6,
+        "title":"Delete Job Bill",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 7,
+        "title":"View Job Bill Detail",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 7,
+        "title":"Add Job Bill Detail",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 7,
+        "title":"Edit Job Bill Detail",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 7,
+        "title":"Delete Job Bill Detail",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 8,
+        "title":"View Job Bill File",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 8,
+        "title":"Add Job Bill File",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 8,
+        "title":"Edit Job Bill File",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 8,
+        "title":"Delete Job Bill File",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 9,
+        "title":"View Job Bill Payment",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 9,
+        "title":"Add Job Bill Payment",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 9,
+        "title":"Edit Job Bill Payment",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 9,
+        "title":"Delete Job Bill Payment",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 10,
+        "title":"View Job Bill Payment Detail",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 10,
+        "title":"Add Job Bill Payment Detail",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 10,
+        "title":"Edit Job Bill Payment Detail",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 10,
+        "title":"Delete Job Bill Payment Detail",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 11,
+        "title":"View Job Container",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 11,
+        "title":"Add Job Container",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 11,
+        "title":"Edit Job Container",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 11,
+        "title":"Delete Job Container",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 12,
+        "title":"View Job",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 12,
+        "title":"Add Job",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 12,
+        "title":"Edit Job",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 12,
+        "title":"Delete Job",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 13,
+        "title":"View Job File",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 13,
+        "title":"Add Job File",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 13,
+        "title":"Edit Job File",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 13,
+        "title":"Delete Job File",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 14,
+        "title":"View Job Invoice",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 14,
+        "title":"Add Job Invoice",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 14,
+        "title":"Edit Job Invoice",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 14,
+        "title":"Delete Job Invoice",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 15,
+        "title":"View Job Invoice Detail",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 15,
+        "title":"Add Job Invoice Detail",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 15,
+        "title":"Edit Job Invoice Detail",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 15,
+        "title":"Delete Job Invoice Detail",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 16,
+        "title":"View Job Invoice File",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 16,
+        "title":"Add Job Invoice File",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 16,
+        "title":"Edit Job Invoice File",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 16,
+        "title":"Delete Job Invoice File",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 17,
+        "title":"View Job Invoice Receipt",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 17,
+        "title":"Add Job Invoice Receipt",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 17,
+        "title":"Edit Job Invoice Receipt",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 17,
+        "title":"Delete Job Invoice Receipt",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 18,
+        "title":"View Job Invoice Receipt Detail",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 18,
+        "title":"Add Job Invoice Receipt Detail",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 18,
+        "title":"Edit Job Invoice Receipt Detail",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 18,
+        "title":"Delete Job Invoice Receipt Detail",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 19,
+        "title":"View Fuel",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 19,
+        "title":"Add Fuel",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 19,
+        "title":"Edit Fuel",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 19,
+        "title":"Delete Fuel",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 20,
+        "title":"View Fuel Issue",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 20,
+        "title":"Add Fuel Issue",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 20,
+        "title":"Edit Fuel Issue",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 20,
+        "title":"Delete Fuel Issue",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 21,
+        "title":"View Fuel Purchase",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 21,
+        "title":"Add Fuel Purchase",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 21,
+        "title":"Edit Fuel Purchase",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 21,
+        "title":"Delete Fuel Purchase",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 22,
+        "title":"View User",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 22,
+        "title":"Add User",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 22,
+        "title":"Edit User",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 22,
+        "title":"Delete User",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 23,
+        "title":"View Designation",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 23,
+        "title":"Add Designation",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 23,
+        "title":"Edit Designation",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 23,
+        "title":"Delete Designation",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 24,
+        "title":"View Role",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 24,
+        "title":"Add Role",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 24,
+        "title":"Edit Role",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 24,
+        "title":"Delete Role",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 25,
+        "title":"View Role Privilege",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 25,
+        "title":"Add Role Privilege",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 25,
+        "title":"Edit Role Privilege",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 25,
+        "title":"Delete Role Privilege",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 26,
+        "title":"View Fleet",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 26,
+        "title":"Add Fleet",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 26,
+        "title":"Edit Fleet",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 26,
+        "title":"Delete Fleet",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 27,
+        "title":"View Location",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 27,
+        "title":"Add Location",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 27,
+        "title":"Edit Location",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 27,
+        "title":"Delete Location",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 28,
+        "title":"View Operation",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 28,
+        "title":"Add Operation",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 28,
+        "title":"Edit Operation",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 28,
+        "title":"Delete Operation",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 29,
+        "title":"View Fuel Type",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 29,
+        "title":"Add Fuel Type",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 29,
+        "title":"Edit Fuel Type",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 29,
+        "title":"Delete Fuel Type",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 30,
+        "title":"View Project",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 30,
+        "title":"Add Project",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 30,
+        "title":"Edit Project",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 30,
+        "title":"Delete Project",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 31,
+        "title":"View Job Type",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 31,
+        "title":"Add Job Type",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 31,
+        "title":"Edit Job Type",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 31,
+        "title":"Delete Job Type",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 32,
+        "title":"View Sales Tax Territory",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 32,
+        "title":"Add Sales Tax Territory",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 32,
+        "title":"Edit Sales Tax Territory",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 32,
+        "title":"Delete Sales Tax Territory",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 33,
+        "title":"View Company",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 33,
+        "title":"Add Company",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 33,
+        "title":"Edit Company",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 33,
+        "title":"Delete Company",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 34,
+        "title":"View Party",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 34,
+        "title":"Add Party",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 34,
+        "title":"Edit Party",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 34,
+        "title":"Delete Party",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 35,
+        "title":"View Party Type",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 35,
+        "title":"Add Party Type",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 35,
+        "title":"Edit Party Type",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 35,
+        "title":"Delete Party Type",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 36,
+        "title":"View Tank",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 36,
+        "title":"Add Tank",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 36,
+        "title":"Edit Tank",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 36,
+        "title":"Delete Tank",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 37,
+        "title":"View User Status",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 37,
+        "title":"Add User Status",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 37,
+        "title":"Edit User Status",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 37,
+        "title":"Delete User Status",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 38,
+        "title":"View Fleet Type",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 38,
+        "title":"Add Fleet Type",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 38,
+        "title":"Edit Fleet Type",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 38,
+        "title":"Delete Fleet Type",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 39,
+        "title":"View Fleet Manufacturer",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 39,
+        "title":"Add Fleet Manufacturer",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 39,
+        "title":"Edit Fleet Manufacturer",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 39,
+        "title":"Delete Fleet Manufacturer",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 40,
+        "title":"View Job Status",
+        "short_title":"View",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 40,
+        "title":"Add Job Status",
+        "short_title":"Add",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 40,
+        "title":"Edit Job Status",
+        "short_title":"Edit",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 40,
+        "title":"Delete Job Status",
+        "short_title":"Delete",
+        "order_by":4
+    },
+
+    {       
+        "privilege_group_id": 41,
+        "title":"Customer Ledger",
+        "short_title":"Customer Ledger",
+        "order_by":1
+    },
+    {       
+        "privilege_group_id": 41,
+        "title":"Vendor Ledger",
+        "short_title":"Vendor Ledger",
+        "order_by":2
+    },
+    {       
+        "privilege_group_id": 41,
+        "title":"Bank Ledger",
+        "short_title":"Bank Ledger",
+        "order_by":3
+    },
+    {       
+        "privilege_group_id": 41,
+        "title":"General Ledger",
+        "short_title":"General Ledger",
+        "order_by":4
+    },
+    {       
+        "privilege_group_id": 41,
+        "title":"Transaction List",
+        "short_title":"Transaction List",
+        "order_by":5
+    },
+    {       
+        "privilege_group_id": 41,
+        "title":"Collection Report",
+        "short_title":"Collection Report",
+        "order_by":6
+    },
+    {       
+        "privilege_group_id": 41,
+        "title":"Adjustment",
+        "short_title":"Adjustment",
+        "order_by":7
+    },
+    {       
+        "privilege_group_id": 41,
+        "title":"Job wise PnL",
+        "short_title":"Job wise PnL",
+        "order_by":8
+    },
+    {       
+        "privilege_group_id": 41,
+        "title":"Customers List",
+        "short_title":"Customers List",
+        "order_by":9
+    },
+    {       
+        "privilege_group_id": 41,
+        "title":"Vendors List",
+        "short_title":"Vendors List",
+        "order_by":10
+    },
+    {       
+        "privilege_group_id": 42,
+        "title":"Upload Excel Sheet",
+        "short_title":"Upload Excel Sheet",
+        "order_by":11
+    }
+
+
+]

@@ -1,0 +1,14 @@
+[
+    {
+        "title":"In-Active",
+        "slug":"inactive"
+    },
+    {
+        "title":"Active",
+        "slug":"Active"
+    },
+    {
+        "title":"Blocked",
+        "slug":"blocked"
+    }
+]

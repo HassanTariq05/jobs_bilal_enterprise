@@ -1,0 +1,22 @@
+[
+    {       
+        "title":"Online",
+        "short_name":"OLN"
+    },
+    {
+        "title":"Cheque",
+        "short_name":"CHQ"
+    },
+    {       
+        "title":"Pay order",
+        "short_name":"POR"
+    },
+    {
+        "title":"Cash",
+        "short_name":"CSH"
+    }
+]
+
+
+
+
