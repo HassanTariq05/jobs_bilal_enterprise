@@ -22,7 +22,7 @@
                                 <div class="col-md-4">
                             <div class="form-group">
                                 <label for="bl_no">BL No</label>
-                                <input placeholder="Enter BL No ####/mm/yy" type="text" id="bl_no" name="bl_no" value="{{old('bl_no')}}" class="form-control" required oninput="validateBLNo(this)" />
+                                <input placeholder="Enter BL No ####" type="text" id="bl_no" name="bl_no" value="{{old('bl_no')}}" class="form-control" required oninput="validateBLNo(this)" />
                                 <span class="text-danger" id="bl_no_error" style="display: none;">BL No must be in ####/mm/yy format.</span>
                                 @error('bl_no')
                                 <div class="text-danger">required</div>
@@ -332,32 +332,28 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
 
     <script>
-        // Validate BL No format (####/mm/yy)
         function validateBLNo(input) {
-            const blNoPattern = /^\d{4}\/\d{2}\/\d{2}$/;
             const errorSpan = document.getElementById("bl_no_error");
 
-            if (!blNoPattern.test(input.value)) {
-                errorSpan.style.display = "inline";
-                errorSpan.textContent = 'BL No must be in ####/mm/yy format.';
-                return false;
-            } else {
+            if (input.value.trim() === "") {
+                const generatedBLNo = Math.floor(1000 + Math.random() * 9000);
+                input.value = generatedBLNo;
                 errorSpan.style.display = "none";
                 return true;
-            }
+            } 
+
+            errorSpan.style.display = "none";
+            return true;
         }
 
-        // Validate all required fields
         function validateAllFields() {
             let isValid = true;
 
-            // Validate BL No
             const blNoInput = document.getElementById("bl_no");
             if (!validateBLNo(blNoInput)) {
                 isValid = false;
             }
 
-            // Required fields validation
             const requiredFields = [
                 { id: "date", name: "BL Date" },
                 { id: "remarks", name: "Remarks" },
@@ -381,7 +377,6 @@
                 if (e !== 'BreakLoop') throw e;
             }
 
-            // Validate container numbers
             const containerInputs = document.querySelectorAll('input[name="container_no-array[]"]');
             containerInputs.forEach(input => {
                 if (!validateContainer(input)) {
@@ -389,20 +384,24 @@
                 }
             });
 
-            // Submit the form if all validations are passed
             if (isValid) {
                 document.getElementById("submit_button").type = "submit";
                 document.querySelector('form').submit();
             }
         }
 
-        // Validate container number format and uniqueness
         function validateContainer(element) {
             const containerNo = element.value;
             const errorElement = element.nextElementSibling;
             const regex = /^[A-Za-z]{4}[0-9]{9}$/;
 
-            // Step 1: Validate format
+            const manualTab = document.getElementById('nav-manual-entry-tab');
+            if (!manualTab.classList.contains('active')) {
+                errorElement.style.display = 'none';
+                return true;
+            }
+            
+
             if (!regex.test(containerNo)) {
                 errorElement.textContent = 'Container ID must be 4 letters followed by 9 numbers with no spaces.';
                 errorElement.style.display = 'inline';
@@ -420,13 +419,12 @@
                     inputError.textContent = 'Container number must be unique.';
                     inputError.style.display = 'inline';
                     errorElement.style.display = 'none';
-                    return; // Stop further checks for uniqueness
+                    return;
                 } else {
-                    inputError.style.display = 'none'; // Clear error for other inputs
+                    inputError.style.display = 'none';
                 }
             });
 
-            // Clear error if unique
             if (isUnique) {
                 errorElement.style.display = 'none';
             }
@@ -434,7 +432,6 @@
             return isUnique;
         }
 
-        // Add new container row dynamically with unique IDs
         var container_count = 1;
         document.getElementById('add_container_button').addEventListener('click', function(event) {
             event.preventDefault();

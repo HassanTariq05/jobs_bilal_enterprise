@@ -13,6 +13,7 @@ use App\Models\Location;
 //use APP\Models\Parties;
 use App\Models\ContainerSize;
 use App\Models\BookingContainers;
+use DateTime;
 
 //use APP\Models\BookingContainers;
 //use Illuminate\Support\Facades\DB;
@@ -133,7 +134,7 @@ order by bookings.id desc");
         $booking = rand(1000000, 99999);     
         //  date("Y-m-d h:i:sa")
         $month_year = date("d/m/y h:i:sa");
-        $bl_no = $this->bl_prefix. "CA10 " .$month_year;
+        $bl_no = $this->bl_prefix. $booking .$month_year;
         
         dd($bl_no);
     }
@@ -143,43 +144,61 @@ order by bookings.id desc");
     {
         access_guard(26);
         $booking = rand(1000000, 99999);     
+        $month = date("m");
+        $year = date("Y");
 
-        $month_year = date("d/m/y h:i:sa");
-        $bl_no = $this->bl_prefix. " ". $request->bl_no. " " .$month_year;
+        // Fetch or create the monthly count record
+        $monthlyCount = DB::table('monthly_counts')
+            ->where('year', $year)
+            ->where('month', $month)
+            ->first();
+
+        if ($monthlyCount) {
+            // Increment the count for the current month
+            $count = $monthlyCount->count + 1;
+            DB::table('monthly_counts')
+                ->where('id', $monthlyCount->id)
+                ->update(['count' => $count]);
+        } else {
+            // Create a new record for the month
+            $count = 1;
+            DB::table('monthly_counts')->insert([
+                'year' => $year,
+                'month' => $month,
+                'count' => $count,
+            ]);
+        }
+
+        // Format the bl_no
+        $bl_no = $request->bl_no . "/" . $month . "/" . str_pad($count, 2, '0', STR_PAD_LEFT);
         
-         DB::beginTransaction();
- //         For booking table
-         $data = [
-             'booking' => $booking,
-             'bl_no' => $bl_no,
-             'loading_port' => $request->loading_port,
-             'off_load' => $request->off_load,
-             'customer' => $request->customer,
-             'location' => $request->location,
-             'date' => $request->date,
-             'remarks' => $request->remarks,
-             'job_type' => $request->job_type_id,
-         ];
- //        echo json_encode([$data]);
-        
-         try {
-             Booking::create($data);
-             $alert = array(
-                 'message' => 'Saved successfully.',
-                 'alert-type' => 'success'
-             );
-         }
-         catch(\Exception $e) {
+        DB::beginTransaction();
+        $data = [
+            'booking' => $booking,
+            'bl_no' => $bl_no,
+            'loading_port' => $request->loading_port,
+            'off_load' => $request->off_load,
+            'customer' => $request->customer,
+            'location' => $request->location,
+            'date' => $request->date,
+            'remarks' => $request->remarks,
+            'job_type' => $request->job_type_id,
+        ];
 
-             $alert = array(
-                 'message' => 'Booking creation Failed'. $e->getMessage(),
-                 'alert-type' => 'error'
-             );
-             DB::rollBack();
-             return back()->with($alert);
-
- //            dd($e->getMessage());
-             }
+        try {
+            Booking::create($data);
+            $alert = array(
+                'message' => 'Saved successfully.',
+                'alert-type' => 'success'
+            );
+        } catch (\Exception $e) {
+            $alert = array(
+                'message' => 'Booking creation failed: ' . $e->getMessage(),
+                'alert-type' => 'error'
+            );
+            DB::rollBack();
+            return back()->with($alert);
+        }
         
         
             $files = [];
@@ -216,10 +235,12 @@ order by bookings.id desc");
                 
                                     if(!preg_match($regex, $rows[$x][2])) {
                                         $invalid_containers += 1;
-                                        $containers_report[$x] = ["error" => 1,
-                                                            "message" => "container no must be four alphabets followed by 9 numbers with no space between",
-                                                            "container_no" => $rows[$x][2],
-                                                            "cell_address" => $x."C"
+                                        $containers_report[$x] =
+                                        [
+                                        "error" => 1,
+                                        "message" => "container no must be four alphabets followed by 9 numbers with no space between",
+                                        "container_no" => $rows[$x][2],
+                                        "cell_address" => $x."C"
                                         ];
                                     }
                                     else {
@@ -280,16 +301,33 @@ order by bookings.id desc");
         
         return back()->with($alert);
 
-}
+    }
 
     public function store_manually(Request $request) {
+        $booking = rand(1000000, 99999);
+        $month = date("m");
+        $year = date("Y");
 
-       // return view("helo!");
-        // dd($request->all());
-        $booking = rand(1000000, 99999);     
+        $monthlyCount = DB::table('monthly_counts')
+            ->where('year', $year)
+            ->where('month', $month)
+            ->first();
 
-        $month_year = date("d/m/y h:i:sa");
-        $bl_no = $this->bl_prefix. " ". $request->bl_no. " " .$month_year;
+        if ($monthlyCount) {
+            $count = $monthlyCount->count + 1;
+            DB::table('monthly_counts')
+                ->where('id', $monthlyCount->id)
+                ->update(['count' => $count]);
+        } else {
+            $count = 1;
+            DB::table('monthly_counts')->insert([
+                'year' => $year,
+                'month' => $month,
+                'count' => $count,
+            ]);
+        }
+
+        $bl_no = $request->bl_no . "/" . $month . "/" . str_pad($count, 2, '0', STR_PAD_LEFT);
 
         access_guard(28);
         DB::beginTransaction();
@@ -340,7 +378,7 @@ order by bookings.id desc");
             return back()->with($alert);
 
         }
-       //$manual_data = [ [ ] ]; 
+        
        DB::beginTransaction();
        for ($i = 0; $i < count($container_no); $i++) {
             $manual_data = [

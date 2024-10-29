@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h4>Edit : &nbsp;&nbsp;&nbsp;
-                                    <span class="badge badge-secondary text-white"> Booking # {{$row[0]->bl_no}} </span>
+                                    <span class="badge badge-secondary text-white">{{$row[0]->bl_no}} </span>
                                 </h4>
                             </div>
                             
