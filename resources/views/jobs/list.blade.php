@@ -69,7 +69,6 @@
                             </button>
                         <?php $c++;
                         } ?>
-
                     </div>
                 </nav>
             </div>

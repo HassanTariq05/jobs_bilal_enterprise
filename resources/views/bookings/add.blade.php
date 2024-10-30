@@ -21,12 +21,18 @@
                                 <!-- BL No Field with Validation Span -->
                                 <div class="col-md-4">
                             <div class="form-group">
-                                <label for="bl_no">BL No</label>
-                                <input placeholder="Enter BL No ####" type="text" id="bl_no" name="bl_no" value="{{old('bl_no')}}" class="form-control" required oninput="validateBLNo(this)" />
-                                <span class="text-danger" id="bl_no_error" style="display: none;">BL No must be in ####/mm/yy format.</span>
-                                @error('bl_no')
+                            <label for="bl_no">BL No</label>
+                            <input 
+                                placeholder="Enter BL No ####" 
+                                type="text" 
+                                id="bl_no" 
+                                name="bl_no" 
+                                value="{{ old('bl_no') }}" 
+                                class="form-control" 
+                            />
+                            @error('bl_no')
                                 <div class="text-danger">required</div>
-                                @enderror
+                            @enderror
                             </div>
                         </div>
                             <div class="col-md-4">
@@ -36,9 +42,6 @@
                             <div class="col-md-4">
                                 <x-combobox of="locations" label="Off Load" ref="off_load" inline=0 />
                             </div>
-
-
-
                             <div class="col-md-4">
                                 <x-combobox of="parties" label="Customer" ref="customer" inline=0 />
                             </div>
@@ -53,8 +56,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="document_date">BL Date</label>
-                                    <input type="date" id="date" name="date" value="{{old('date')}}" class="form-control" required />
-                                    @error('document_date')
+                                    <input type="date" id="date" name="date" value="{{old('date')}}" class="form-control"/>
+                                    @error('date')
                                     <div class="text-danger">required</div>
                                     @enderror
                                 </div>
@@ -131,13 +134,11 @@
                                                         <table class="table table-sm">
                                                             <thead>
                                                                 <tr>
-
                                                                     <th>Containers</th>
                                                                     <th>SIZE</th>
                                                                     <th>STATUS</th>
                                                                     <th>DATE</th>
                                                                     <th class="text-center">Loading Port</th>
-
                                                                     <th class="text-center">Off Load</th>
                                                                     <th class="text-center">Weight</th>
                                                                     <th class="text-center">Cross Stuffing Status</th>
@@ -150,7 +151,6 @@
                                                                     <td>
                                                                         <div>
                                                                             <input type="text" id="container_no_input_0" name="container_no-array[]" oninput="validateContainer(this)" style="margin-left: 5px; width:150px; height: 40px;">
-                                                                            <span class="container_error" style="color: #f00; display: none;"></span>
                                                                         </div>
                                                                     </td>
 
@@ -219,7 +219,7 @@
                                                                         </select>
 
                                                                     </td>
-                                                                    <td><input type="text" name="detention_date-array[]" style="margin-left: 10px;  width:150px; height: 40px;"></td>
+                                                                    <td><input type="date" name="detention_date-array[]" style="margin-left: 10px;  width:150px; height: 40px;"></td>
                                                                 </tr>
 
                                                             </tbody>
@@ -229,15 +229,18 @@
 
                                                         <div class="card-footer border-top">
                                                             <div class="row">
-                                                                <div class="col-12 text-right">
-                                                                    <?php if (has_permission(68)) { ?>
-                                                                        <button class="btn btn-primary" type="button" id="add_container_button">Add Container</button>
-                                                                    <?php } ?>
+                                                                <div>
+                                                                <span class="container_error" id="validation_line" style="color: #f00; display: none;"></span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-12 text-right">
+                                                <?php if (has_permission(68)) { ?>
+                                                    <button class="btn btn-primary" type="button" id="add_container_button">Add Container</button>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                     </div>
@@ -332,55 +335,71 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
 
     <script>
-        function validateBLNo(input) {
-            const errorSpan = document.getElementById("bl_no_error");
-
-            if (input.value.trim() === "") {
-                const generatedBLNo = Math.floor(1000 + Math.random() * 9000);
-                input.value = generatedBLNo;
-                errorSpan.style.display = "none";
-                return true;
-            } 
-
-            errorSpan.style.display = "none";
-            return true;
-        }
-
         function validateAllFields() {
+            const manualTab = document.getElementById('nav-manual-entry-tab');
+            if (!manualTab.classList.contains('active')) {
+                document.getElementById("submit_button").type = "submit";
+                document.querySelector('form').submit();
+            }
+
             let isValid = true;
-
-            const blNoInput = document.getElementById("bl_no");
-            if (!validateBLNo(blNoInput)) {
-                isValid = false;
-            }
-
-            const requiredFields = [
-                { id: "date", name: "BL Date" },
-                { id: "remarks", name: "Remarks" },
-                { id: "loading_port", name: "Loading Port" },
-                { id: "off_load", name: "Off Load" },
-                { id: "customer", name: "Customer" },
-                { id: "location", name: "Location" },
-                { id: "job_type_id", name: "Job Type" },
-            ];
-
-            try {
-                requiredFields.forEach(field => {
-                    const input = document.getElementById(field.id) || document.querySelector(`[ref="${field.id}"]`);
-                    if (!input.value) {
-                        isValid = false;
-                        alert(`${field.name} is required.`);
-                        throw 'BreakLoop';
-                    }
-                });
-            } catch (e) {
-                if (e !== 'BreakLoop') throw e;
-            }
-
             const containerInputs = document.querySelectorAll('input[name="container_no-array[]"]');
-            containerInputs.forEach(input => {
-                if (!validateContainer(input)) {
+            const statusSelects = document.querySelectorAll('select[name="container_status-array[]"]');
+            const loadingPortSelects = document.querySelectorAll('select[name="loading_port-array[]"]');
+            const offLoadSelects = document.querySelectorAll('select[name="off_load-array[]"]');
+            const weightInputs = document.querySelectorAll('input[name="weight-array[]"]');
+            const detentionDateInputs = document.querySelectorAll('input[name="detention_date-array[]"]');
+            const errorElement = document.getElementById("validation_line");
+
+            errorElement.style.display = 'none';
+            const containerRecords = {}; // To keep track of container numbers and their statuses
+
+            containerInputs.forEach((containerInput, index) => {
+                const containerNo = containerInput.value;
+                const status = statusSelects[index].value;
+                const loadingPort = loadingPortSelects[index].value;
+                const offLoad = offLoadSelects[index].value;
+                const weight = weightInputs[index].value;
+                const detentionDate = detentionDateInputs[index].value;
+
+                // Check for empty fields
+                if (!containerNo || !status || !loadingPort || !offLoad || !weight || !detentionDate) {
+                    errorElement.textContent = 'All fields are required.';
+                    errorElement.style.display = 'inline';
                     isValid = false;
+                    return; // Stop further validation if any field is missing
+                }
+
+                // Regex validation for container number format
+                const regex = /^[A-Za-z]{4}[0-9]{9}$/;
+                if (!regex.test(containerNo)) {
+                    errorElement.textContent = 'Container ID must be 4 letters followed by 9 numbers with no spaces.';
+                    errorElement.style.display = 'inline';
+                    isValid = false;
+                    return; // Stop further validation for this input
+                }
+
+                // Track container numbers and their statuses
+                if (containerRecords[containerNo]) {
+                    containerRecords[containerNo].push(status);
+                } else {
+                    containerRecords[containerNo] = [status];
+                }
+
+                // Validate container records
+                const statusArray = containerRecords[containerNo];
+                if (statusArray.length > 2) {
+                    errorElement.textContent = 'A maximum of two containers with the same ID is allowed.';
+                    errorElement.style.display = 'inline';
+                    isValid = false;
+                    return;
+                }
+
+                if (statusArray.length === 2 && statusArray[0] === statusArray[1]) {
+                    errorElement.textContent = 'Container IDs should be unique.';
+                    errorElement.style.display = 'inline';
+                    isValid = false;
+                    return;
                 }
             });
 
@@ -390,47 +409,6 @@
             }
         }
 
-        function validateContainer(element) {
-            const containerNo = element.value;
-            const errorElement = element.nextElementSibling;
-            const regex = /^[A-Za-z]{4}[0-9]{9}$/;
-
-            const manualTab = document.getElementById('nav-manual-entry-tab');
-            if (!manualTab.classList.contains('active')) {
-                errorElement.style.display = 'none';
-                return true;
-            }
-            
-
-            if (!regex.test(containerNo)) {
-                errorElement.textContent = 'Container ID must be 4 letters followed by 9 numbers with no spaces.';
-                errorElement.style.display = 'inline';
-                return false;
-            }
-
-            // Step 2: Check uniqueness
-            const allInputs = document.querySelectorAll('input[name="container_no-array[]"]');
-            let isUnique = true;
-
-            allInputs.forEach(input => {
-                const inputError = input.nextElementSibling;
-                if (input !== element && input.value === containerNo) {
-                    isUnique = false;
-                    inputError.textContent = 'Container number must be unique.';
-                    inputError.style.display = 'inline';
-                    errorElement.style.display = 'none';
-                    return;
-                } else {
-                    inputError.style.display = 'none';
-                }
-            });
-
-            if (isUnique) {
-                errorElement.style.display = 'none';
-            }
-
-            return isUnique;
-        }
 
         var container_count = 1;
         document.getElementById('add_container_button').addEventListener('click', function(event) {
@@ -497,7 +475,7 @@
                     <option value="no">NO</option>
                 </select>
             </td>
-            <td><input type="text" name="detention_date-array[]" style="margin-left: 10px;  width:150px; height: 40px;"></td>`;
+            <td><input type="date" name="detention_date-array[]" style="margin-left: 10px;  width:150px; height: 40px;"></td>`;
 
             tableBody.appendChild(row);
             container_count += 1;

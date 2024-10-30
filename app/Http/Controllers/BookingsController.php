@@ -170,7 +170,8 @@ order by bookings.id desc");
         }
 
         // Format the bl_no
-        $bl_no = $request->bl_no . "/" . $month . "/" . str_pad($count, 2, '0', STR_PAD_LEFT);
+        // $bl_no = $request->bl_no . "/" . $month . "/" . str_pad($count, 2, '0', STR_PAD_LEFT);
+        $bl_no = "BL/" . $month . "/" . str_pad($count, 2, '0', STR_PAD_LEFT);
         
         DB::beginTransaction();
         $data = [
@@ -327,7 +328,8 @@ order by bookings.id desc");
             ]);
         }
 
-        $bl_no = $request->bl_no . "/" . $month . "/" . str_pad($count, 2, '0', STR_PAD_LEFT);
+        // $bl_no = $request->bl_no . "/" . $month . "/" . str_pad($count, 2, '0', STR_PAD_LEFT);
+        $bl_no = "BL/" . $month . "/" . str_pad($count, 2, '0', STR_PAD_LEFT);
 
         access_guard(28);
         DB::beginTransaction();
@@ -449,6 +451,27 @@ order by bookings.id desc");
         DB::beginTransaction();
          try {
             Booking::find($id)->delete();
+             DB::commit();
+             $alert = array(
+                 'message' => 'Record has been deleted successfully.',
+                 'alert-type' => 'success'
+             );
+         } catch (\Exception $e) {
+             DB::rollBack();
+             $alert = array(
+                 'message' => $e->getMessage(),
+                 'alert-type' => 'error'
+             );
+         }
+         return back()->with($alert);
+    }
+
+    public function trashContainer($id = 0)
+    {
+        access_guard(28);
+        DB::beginTransaction();
+         try {
+            BookingContainers::find($id)->delete();
              DB::commit();
              $alert = array(
                  'message' => 'Record has been deleted successfully.',

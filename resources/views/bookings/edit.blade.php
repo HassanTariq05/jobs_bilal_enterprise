@@ -172,7 +172,6 @@
                                         <th>off Load</th>
                                         <!-- <th>Customer</th> -->
                                         <th>Remarks</th>
-                                        <!-- <th width="100" class="text-center">Action</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -194,12 +193,10 @@
                                         <td>{{$container->loading_port}}</td>
                                         <td>{{$container->off_loading_port}}</td>
                                         <td>{{$container->remarks}}</td>
-                                        
-                                        
                                     </tr>
                                     @endforeach
-                                    @endif                                </tbody>
-
+                                    @endif
+                                </tbody>
                             </table>
                         </div>
                     </div>
