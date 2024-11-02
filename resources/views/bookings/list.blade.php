@@ -29,7 +29,7 @@
                                     <th>Location</th>
                                     <th>Date</th>
                                     <th>View</th>
-                                    <th>Edit</th>
+                                    <th class="text-center align-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,11 +51,8 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="{{route('edit-booking', [$row->id])}}" class="btn btn-icon  btn-sm btn-dark">
-                                            <i class="far fa-edit"></i>
-                                        </a>
+                                    <x-action-btn route="booking" id="{{ $row->id }}" privilegeEditId="69" privilegeDeleteId="70" />
                                     </td>
-
                                 </tr>
                                 @endforeach
                                 @endif

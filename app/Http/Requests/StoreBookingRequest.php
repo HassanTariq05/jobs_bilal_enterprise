@@ -28,7 +28,8 @@ class StoreBookingRequest extends FormRequest
             'off_load' => 'required',
             'customer' => 'required',
             'location' => 'required',
-            'date' => 'required'
+            'date' => 'required',
+            'job_type_id' => 'required'
         ];
     }
 }

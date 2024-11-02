@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h4>Edit : &nbsp;&nbsp;&nbsp;
-                                    <span class="badge badge-secondary text-white"> Booking # {{$row[0]->bl_no}} </span>
+                                    <span class="badge badge-secondary text-white">{{$row[0]->bl_no}} </span>
                                 </h4>
                             </div>
                             
@@ -172,7 +172,6 @@
                                         <th>off Load</th>
                                         <!-- <th>Customer</th> -->
                                         <th>Remarks</th>
-                                        <!-- <th width="100" class="text-center">Action</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -194,12 +193,10 @@
                                         <td>{{$container->loading_port}}</td>
                                         <td>{{$container->off_loading_port}}</td>
                                         <td>{{$container->remarks}}</td>
-                                        
-                                        
                                     </tr>
                                     @endforeach
-                                    @endif                                </tbody>
-
+                                    @endif
+                                </tbody>
                             </table>
                         </div>
                     </div>
