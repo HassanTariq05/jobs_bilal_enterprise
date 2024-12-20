@@ -8,7 +8,7 @@
                             <h4>Bookings</h4>
                         </div>
                         <div class="col-md-6 text-right">
-                            <?php if (has_permission(26)) { ?>
+                            <?php if (has_permission(253)) { ?>
                                 <a href="{{route('create-booking')}}" class="btn btn-sm btn-primary">Add New</a>
                             <?php } ?>
                         </div>
@@ -28,7 +28,7 @@
                                     <th>Job Type</th>
                                     <th>Location</th>
                                     <th>Date</th>
-                                    <th>View</th>
+                                    <th>Status</th>
                                     <th class="text-center align-center">Action</th>
                                 </tr>
                             </thead>
@@ -45,13 +45,9 @@
                                     <td>{{$row->job_type_title}}</td>
                                     <td>{{$row->location_name}}</td>
                                     <td>{{$row->date}}</td>
+                                    <td>{{$row->status}}</td>
                                     <td>
-                                        <span class="btn btn-icon btn-sm" style="padding-left: 10px" onclick="booking_container('{{$row->booking}}')" ;>
-                                            <i class="fa fa-eye"></i>
-                                        </span>
-                                    </td>
-                                    <td>
-                                    <x-action-btn route="booking" id="{{ $row->id }}" privilegeEditId="69" privilegeDeleteId="70" />
+                                    <x-action-btn route="booking" id="{{ $row->id }}" privilegeEditId="253" privilegeDeleteId="254" />
                                     </td>
                                 </tr>
                                 @endforeach

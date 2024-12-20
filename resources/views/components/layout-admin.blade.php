@@ -255,20 +255,23 @@ $segs = [
               <hr />
             </li>
 
+            <?php if (has_category_permission(1)) { ?>
             <li>
               <a href="{{route('dashboard')}}" class="nav-link">
                 <i class="fa fa-th"></i>
                 <span>Dashboard</span>
               </a>
             </li>
+            <?php } ?>
 
             <li class="menu-header">Operations</li>
+            <?php if (has_category_permission(2)) { ?>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown">
                 <i class="fas fa-users"></i>
                 <span>Jobs Manager</span>
               </a>
-              <ul class="dropdown-menu" @if($seg1=='jobs' ) style="display: block;" @endif>
+              <ul class="dropdown-menu" @if($seg1=='jobs' || $seg1=='work-orders' ) style="display: block;" @endif>
 
                 <?php if (has_permission(67)) { ?>
                   <li class="@if($seg1=='jobs' && $seg2=='') active @endif"><a class="nav-link" href="{{route('jobs')}}">Job Queue</a></li>
@@ -289,40 +292,44 @@ $segs = [
                     <a class="nav-link" href="{{route('create-job-payment')}}">Add Job Payments</a>
                   </li>
                 <?php } ?>
+                <?php if (has_permission(250)) { ?>
+                  <li class="@if($seg1=='work-orders' && $seg2=='all') active @endif">
+                    <a class="nav-link" href="{{route('work-orders')}}">Work Orders</a>
+                  </li>
+                <?php } ?>
               </ul>
             </li>
+            <?php } ?>
                 <!-- Added Bookings tab-->
-                <li class="dropdown">
+            <?php if (has_category_permission(8)) { ?>
+            <li class="dropdown">
               <a href="#" class="nav-link has-dropdown">
                 <i class="fas fa-users"></i>
                 <span>Bookings Manager</span>
               </a>
               <ul class="dropdown-menu" @if($seg1=='bookings' ) style="display: block;" @endif>
 
-                <?php if (has_permission(67)) { ?>
+                <?php if (has_permission(252)) { ?>
                   <li class="@if($seg1=='bookings' && $seg2=='') active @endif"><a class="nav-link" href="{{route('bookings')}}">Booking Queue</a></li>
                 <?php } ?>
 
-                <?php if (has_permission(68)) { ?>
+                <?php if (has_permission(253)) { ?>
                   <li class="@if($seg1=='bookings' && $seg2=='add') active @endif"><a class="nav-link" href="{{route('create-booking')}}">Add New Booking</a></li>
                 <?php } ?>
-
-                
-
                 
               </ul>
             </li>
+            <?php } ?>
 
-
+            <?php if (has_category_permission(1)) { ?>
             <li>
               <a href="{{route('journal-vouchers')}}" class="nav-link">
                 <i class="fa fa-th"></i>
                 <span>Journal Vouchers</span>
               </a>
             </li>
-
-
-
+            <?php } ?>
+            <?php if (has_group_permission(17)) { ?>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown">
                 <i class="fas fa-fire"></i>
@@ -347,6 +354,9 @@ $segs = [
                 <?php } ?>
               </ul>
             </li>
+            <?php } ?>
+
+            <?php if (has_group_permission(45)) { ?>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown">
                 <i class="fas fa-fire"></i>
@@ -371,12 +381,12 @@ $segs = [
                 <?php } ?>
               </ul>
             </li>
+            <?php } ?>
 
 
 
 
-
-
+            <?php if (has_category_permission(3)) { ?>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown">
                 <i class="fas fa-water"></i>
@@ -397,7 +407,9 @@ $segs = [
 
               </ul>
             </li>
+            <?php } ?>
 
+            <?php if (has_category_permission(7)) { ?>
             <li class="menu-header">REPORTS</li>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown">
@@ -499,9 +511,10 @@ $segs = [
                 <?php */ ?>
               </ul>
             </li>
+            <?php } ?>
 
 
-
+            <?php if (has_category_permission(6)) { ?>
             <li class="menu-header">Master Setup</li>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown">
@@ -579,7 +592,7 @@ $segs = [
 
                 <?php if (has_permission(128)) { ?>
                   <li class="@if($seg1=='users' && $seg2=='add') active @endif">
-                    <a class="nav-link" href="{{route('create-designation')}}">Add New</a>
+                    <a class="nav-link" href="{{route('create-user')}}">Add New</a>
                   </li>
                 <?php } ?>
 
@@ -702,6 +715,8 @@ $segs = [
 
               </ul>
             </li>
+            <?php } ?>
+
           </ul>
         </aside>
       </div>
@@ -769,6 +784,7 @@ $segs = [
       serverSide: false,
       paging: true,
       pageLength: 100,
+      bRetrieve: true,
       layout: {
         topStart: {
           buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
@@ -781,6 +797,7 @@ $segs = [
       serverSide: false,
       paging: false,
       pageLength: 10,
+      bRetrieve: true,
       layout: {
         topStart: {
           buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
@@ -793,6 +810,7 @@ $segs = [
       serverSide: false,
       paging: true,
       pageLength: 100,
+      bRetrieve: true,
       layout: {
         topStart: {
           buttons: ['copy', 'csv', 'excel', 'pdf', 'print']

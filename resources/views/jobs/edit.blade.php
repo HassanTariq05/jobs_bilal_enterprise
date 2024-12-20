@@ -214,6 +214,9 @@
                                 <?php if (has_permission(249)) { ?>
                                 <a type="button" href="{{route('job-performance', [$row->id])}}" class="btn btn-dark ml-3">Job Performance</a>
                                 <?php } ?>
+                                <?php //if (has_permission(249)) { ?>
+                                <!-- <a type="button" href="{{route('job-performance-new', [$row->id])}}" class="btn btn-dark ml-3">Job Performance</a> -->
+                                <?php //} ?>
                             </div>
                             <div class="col-md-6">
 

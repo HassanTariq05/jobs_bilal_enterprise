@@ -97,7 +97,7 @@
 
     <?php if (!$job->approved) { ?>
 
-        <?php if ($rows->count()) { ?>
+        <?php //if (count($rows)) { ?>
 
             <div class="row">
                 <div class="col-12">
@@ -336,8 +336,8 @@
                 </div>
             </div>
             <input type="hidden" id="excel_data_counter_value" value="<?= $excel_data_counter ?>" />
-        <?php } else { ?>
-            <div class="card">
+        <?php //} else { ?>
+            <!-- <div class="card">
                 <div class="card-header border-bottom bg-danger">
                     <div class="row">
                         <div class="col-md-12">
@@ -354,8 +354,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php } ?>
+            </div> -->
+        <?php //} ?>
 
 
         <?php
@@ -379,6 +379,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h4>Rate Applied</h4>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <a href="{{ route('download-job-invoice-detail-container-breakup', [$job->id, $inv->id, $cic]) }}" target="_blank">
+                                        <span class="btn btn-icon btn-sm btn-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Download Applied Rates">
+                                            <i class="fas fa-download"></i>
+                                        </span>
+                                    </a>
                                 </div>
                             </div>
                         </div>

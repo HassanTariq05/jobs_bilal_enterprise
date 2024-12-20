@@ -191,6 +191,59 @@ function has_permission($privilege_id = 0)
     return $output;
 }
 
+function has_category_permission($privilege_category_id = 0)
+{
+    //echo '192 = '.$privilege_id;
+    $output = 0;
+    if (Auth::user()->id < 2) {
+        $output = 1;
+    } else {
+        if ($privilege_category_id > 0) {
+            $role_id = Auth::user()->user_role_id;
+            $result = 
+            RolePrivilege::
+                select('role_privileges.*', 'p.*')
+                ->join('privileges as p', 'role_privileges.privilege_id', 'p.id')
+                ->join('privilege_groups as pg', 'p.privilege_group_id', 'pg.id')
+                ->join('privilege_categories as pc', 'pg.privilege_category_id', 'pc.id')
+                ->where('role_id', $role_id)
+                ->where('pc.id', $privilege_category_id)
+                ->get();
+                // dd($result);            
+            if ($result->count() > 0) {
+                $output = 1;
+            }
+        }
+    }
+    return $output;
+}
+
+function has_group_permission($privilege_group_id = 0)
+{
+    //echo '192 = '.$privilege_id;
+    $output = 0;
+    if (Auth::user()->id < 2) {
+        $output = 1;
+    } else {
+        if ($privilege_group_id > 0) {
+            $role_id = Auth::user()->user_role_id;
+            $result = 
+            RolePrivilege::
+                select('role_privileges.*', 'p.*')
+                ->join('privileges as p', 'role_privileges.privilege_id', 'p.id')
+                ->join('privilege_groups as pg', 'p.privilege_group_id', 'pg.id')
+                ->where('role_id', $role_id)
+                ->where('pg.id', $privilege_group_id)
+                ->get();
+                // dd($result);            
+            if ($result->count() > 0) {
+                $output = 1;
+            }
+        }
+    }
+    return $output;
+}
+
 function get_specific_field_by_id($table, $field, $id = 0)
 {
     $output = '';

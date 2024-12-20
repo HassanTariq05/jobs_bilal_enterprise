@@ -10,7 +10,7 @@
                                 <h4>Add New Booking</h4>
                             </div>
                             <div class="col-md-6 text-right">
-                                <?php if (has_permission(67)) { ?>
+                                <?php if (has_permission(252)) { ?>
                                     <a href="{{route('bookings')}}" class="btn btn-sm btn-primary">View All</a>
                                 <?php } ?>
                             </div>
@@ -143,6 +143,7 @@
                                                                     <th class="text-center">Weight</th>
                                                                     <th class="text-center">Cross Stuffing Status</th>
                                                                     <th class="text-center">Detention Start Date</th>
+                                                                    <th class="text-center">Actions</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="containers_table">
@@ -238,7 +239,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 text-right">
-                                                <?php if (has_permission(68)) { ?>
+                                                <?php if (has_permission(253)) { ?>
                                                     <button class="btn btn-primary" type="button" id="add_container_button">Add Container</button>
                                                 <?php } ?>
                                             </div>
@@ -256,7 +257,7 @@
                                 <div class="card-footer">
                                     <div class="row">
                                         <div class="col-12 text-right">
-                                            <?php if (has_permission(68)) { ?>
+                                            <?php if (has_permission(253)) { ?>
                                                 <button id="submit_button" class="btn btn-primary" onclick="validateAllFields()" type="button">Submit</button>
                                             <?php } ?>
                                         </div>
@@ -335,6 +336,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
 
     <script>
+
         function validateAllFields() {
             const manualTab = document.getElementById('nav-manual-entry-tab');
             if (!manualTab.classList.contains('active')) {
@@ -371,9 +373,9 @@
                 }
 
                 // Regex validation for container number format
-                const regex = /^[A-Za-z]{4}[0-9]{9}$/;
+                const regex = /^[A-Za-z]{4}[0-9]{7}$/;
                 if (!regex.test(containerNo)) {
-                    errorElement.textContent = 'Container ID must be 4 letters followed by 9 numbers with no spaces.';
+                    errorElement.textContent = 'Container ID must be 4 letters followed by 7 numbers with no spaces.';
                     errorElement.style.display = 'inline';
                     isValid = false;
                     return; // Stop further validation for this input
@@ -416,8 +418,9 @@
 
             var tableBody = document.getElementById('containers_table');
             var row = document.createElement('tr');
-
-            row.innerHTML = `<td>
+            row.setAttribute('id', 'container_row_'+container_count)
+            row.innerHTML = 
+            `<td>
                 <div>
                     <input type="text" id="container_no_input_${container_count}" oninput="validateContainer(this)" name="container_no-array[]" style="margin-left: 5px; width:150px; height: 40px;">
                     <span class="container_error" style="color: #f00; display: none;"></span>
@@ -475,7 +478,12 @@
                     <option value="no">NO</option>
                 </select>
             </td>
-            <td><input type="date" name="detention_date-array[]" style="margin-left: 10px;  width:150px; height: 40px;"></td>`;
+            <td><input type="date" name="detention_date-array[]" style="margin-left: 10px;  width:150px; height: 40px;"></td>
+            <td>
+                <div class="delete_manual_container" data=`+(container_count)+` onclick="if(confirm('Are you sure you want to delete this?')) deleteRow(`+container_count+`)" >
+                    <i class="fas fa-trash"></i>
+                </div>
+            </td>`;
 
             tableBody.appendChild(row);
             container_count += 1;
@@ -491,6 +499,12 @@
             const form = document.getElementById('myForm');
             form.setAttribute('action', '{{route("store-booking")}}');
         });
+
+        function deleteRow(counter) {
+            var row = document.getElementById('container_row_'+counter);
+            row.parentNode.removeChild(row);
+        }
+
     </script>
 
 </x-layout-admin>

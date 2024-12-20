@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBookingRequest;
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\BookingFiles;
@@ -42,7 +43,7 @@ class BookingsController extends Controller
     public function index()
     {
       //  echo "<h1>Hello</h1>";
-        access_guard(25);
+        access_guard(252);
         $rows =  DB::select("
 SELECT 
     bookings.*, 
@@ -63,6 +64,7 @@ JOIN
     parties ON bookings.customer = parties.id
 LEFT JOIN 
     job_types AS jt ON bookings.job_type = jt.id
+    WHERE bookings.status like 'PENDING'
 order by bookings.id desc");
 
         return view($this->root . 'list', compact('rows'));
@@ -72,7 +74,7 @@ order by bookings.id desc");
     }
 
     public function create() {
-        access_guard(26);
+        access_guard(253);
         $location = Location::all();
         $parties= Party::all();
 //       $container_sizes = ContainerSize::all();
@@ -91,7 +93,7 @@ order by bookings.id desc");
 
     public function edit($id) {
 
-        access_guard(26);
+        access_guard(255);
         $location = Location::all();
         $parties= Party::all();
         $containers = Db::select("SELECT bc.* from booking_containers  as bc inner join bookings as bk on bc.booking = bk.booking where bk.id = {$id};");
@@ -142,36 +144,11 @@ order by bookings.id desc");
 
     public function store(StoreBookingRequest $request) 
     {
-        access_guard(26);
-        $booking = rand(1000000, 99999);     
-        $month = date("m");
-        $year = date("Y");
+        access_guard(253);
 
-        // Fetch or create the monthly count record
-        $monthlyCount = DB::table('monthly_counts')
-            ->where('year', $year)
-            ->where('month', $month)
-            ->first();
+        $bl_no = $this->getNextBLNo();
 
-        if ($monthlyCount) {
-            // Increment the count for the current month
-            $count = $monthlyCount->count + 1;
-            DB::table('monthly_counts')
-                ->where('id', $monthlyCount->id)
-                ->update(['count' => $count]);
-        } else {
-            // Create a new record for the month
-            $count = 1;
-            DB::table('monthly_counts')->insert([
-                'year' => $year,
-                'month' => $month,
-                'count' => $count,
-            ]);
-        }
-
-        // Format the bl_no
-        // $bl_no = $request->bl_no . "/" . $month . "/" . str_pad($count, 2, '0', STR_PAD_LEFT);
-        $bl_no = "BL/" . $month . "/" . str_pad($count, 2, '0', STR_PAD_LEFT);
+        $booking = rand(1000000, 99999);
         
         DB::beginTransaction();
         $data = [
@@ -228,40 +205,40 @@ order by bookings.id desc");
                         $rows = Excel::toArray(new JobPerformanceImport, storage_path("app/public/" . $file['path']));
                         $rows = $rows[0];
 
-                        //dd($rows);
+                        // dd($rows);
                         try {
                             if(COUNT($rows)){
                                 $containers_report = [ ];
-                                for($x=1;$x<COUNT($rows);$x++){
-                
-                                    if(!preg_match($regex, $rows[$x][2])) {
+                                for($x=1;$x<COUNT($rows);$x++) {
+                                    if(!preg_match($regex, $rows[$x][0])) {
                                         $invalid_containers += 1;
                                         $containers_report[$x] =
                                         [
-                                        "error" => 1,
-                                        "message" => "container no must be four alphabets followed by 9 numbers with no space between",
-                                        "container_no" => $rows[$x][2],
-                                        "cell_address" => $x."C"
+                                            "error" => 1,
+                                            "message" => "Container no must be four alphabets followed by 7 numbers with no space between",
+                                            "container_no" => $rows[$x][2],
+                                            "cell_address" => $x."C"
                                         ];
+
+                                        throw new Exception("Container# '". $rows[$x][0] ."' must be 4 alphabets followed by 9 numbers with no space between");
                                     }
                                     else {
                                     
-                                     $sheet_data = [
-                                         'booking' =>  $booking,
-                                         'bl_no' => $rows[$x][1],
-                                         'container_no' => $rows[$x][2],
-                                         'size' => $rows[$x][3],
-                                         'status' => $rows[$x][4],
-                                         'vehicle_no' => $rows[$x][5],
-                                         'trucking_mode' => $rows[$x][6],
-                                         'date' => $rows[$x][7],
-                                         'loading_port' => $rows[$x][8],
-                                         'off_loading_port' => $rows[$x][9],
-                                         'party' => $rows[$x][10],
-                                         'remarks' => $rows[$x][11],
-                                     ];
-                        
-                                     BookingContainers::create($sheet_data);
+                                        $sheet_data = [
+                                            'booking' =>  $booking,
+                                            'bl_no' => $bl_no,
+                                            'container_no' => $rows[$x][0],
+                                            'size' => $rows[$x][1],
+                                            'status' => $rows[$x][2],
+                                            'date' => $rows[$x][3],
+                                            'loading_port' => $rows[$x][4],
+                                            'off_loading_port' => $rows[$x][5],
+                                            'weight' => $rows[$x][6],
+                                            'cross_stuffing_status' => $rows[$x][7],
+                                            'detention_start_date' => $rows[$x][8],
+                                        ];
+                            
+                                        BookingContainers::create($sheet_data);
     
                                     }
                                 }
@@ -278,18 +255,14 @@ order by bookings.id desc");
                             }
 
 
-                        }catch (\Exception $e) {
+                        } catch (\Exception $e) {
                             DB::rollBack();
-                
-                                $alert = array(
-                                    'message' => "error". $e->getMessage(),
-                                    'alert-type' => 'error'
-                                );
-                                return back()->with($alert);
-
+                            $alert = array(
+                                'message' => $e->getMessage(),
+                                'alert-type' => 'error'
+                            );
+                            return back()->with($alert);
                         }
-
-
                     }
                     
                 }
@@ -304,34 +277,29 @@ order by bookings.id desc");
 
     }
 
-    public function store_manually(Request $request) {
-        $booking = rand(1000000, 99999);
-        $month = date("m");
-        $year = date("Y");
+    private function getNextBLNo() {
+        $currMonth = date("m");
 
-        $monthlyCount = DB::table('monthly_counts')
-            ->where('year', $year)
-            ->where('month', $month)
-            ->first();
+        $lastBooking = Booking::all()->last();
+        $lastBookingCount = 1;
 
-        if ($monthlyCount) {
-            $count = $monthlyCount->count + 1;
-            DB::table('monthly_counts')
-                ->where('id', $monthlyCount->id)
-                ->update(['count' => $count]);
-        } else {
-            $count = 1;
-            DB::table('monthly_counts')->insert([
-                'year' => $year,
-                'month' => $month,
-                'count' => $count,
-            ]);
+        if($lastBooking) {
+            $arr = explode("/", $lastBooking->bl_no);
+            if(count($arr) > 1 && $arr[1] == $currMonth) {
+                $lastBookingCount = $arr[2] + 1;
+            }
         }
 
-        // $bl_no = $request->bl_no . "/" . $month . "/" . str_pad($count, 2, '0', STR_PAD_LEFT);
-        $bl_no = "BL/" . $month . "/" . str_pad($count, 2, '0', STR_PAD_LEFT);
+       return "BL/" . $currMonth . "/" . str_pad($lastBookingCount, 4, '0', STR_PAD_LEFT);
+    }
 
-        access_guard(28);
+    public function store_manually(Request $request) {
+
+        $booking = rand(1000000, 99999);
+
+        $bl_no = $this->getNextBLNo();
+
+        access_guard(253);
         DB::beginTransaction();
         // $booking_no = $request->booking;
         $container_no = $request['container_no-array'];
@@ -392,8 +360,8 @@ order by bookings.id desc");
                 'vehicle_no' => '',
                 'trucking_mode' => '',
                 'date' => $date_array[$i],
-                'loading_port' => $container_offload[$i],
-                'off_loading_port' => $container_loading[$i],
+                'loading_port' => $container_loading[$i],
+                'off_loading_port' => $container_offload[$i],
                 'party' => '',
                 'remarks' => $request->remarks,
                 'container_weight' => $weight[$i],
@@ -405,6 +373,71 @@ order by bookings.id desc");
             //dd($manual_data);
         
             // now booking_containers table
+            try {
+                BookingContainers::create($manual_data);
+                $alert = array(
+                    'message' => 'Saved successfully.',
+                    'alert-type' => 'success'
+                );
+                
+            }
+            catch(\Exception $e) {
+
+                $alert = array(
+                    'message' => 'Containers manual entry Failed'. $e->getMessage(),
+                    'alert-type' => 'error'
+                );
+                DB::rollBack();
+                return back()->with($alert);
+
+            } 
+        }
+        DB::commit();
+        return back()->with($alert);
+    }
+
+    public function update_containers_manually(Request $request) {
+
+        $booking = $request['booking'];
+
+        $bl_no = $request['bl_no'];
+
+        access_guard(253);
+        
+        $container_no = $request['container_no-array'];
+        $container_size = $request['container_size-array'];
+       
+        $container_status = $request['container_status-array'];
+        $date_array = $request['container_date-array'];
+        $container_offload = $request['off_load-array'];
+        $container_loading = $request['loading_port-array'];
+        $weight = $request['weight-array'];
+        $cross_stuffing_status = $request['cross_stuffing_status-array'];
+        $detention_date = $request['detention_date-array'];
+        
+       DB::beginTransaction();
+
+       $oldContainers = BookingContainers::where(["bl_no"=>$bl_no])->delete();
+
+       for ($i = 0; $i < count($container_no); $i++) {
+            $manual_data = [
+                'booking' => $booking,
+                'bl_no' => $bl_no,
+                'container_no' => $container_no[$i],
+                'size' => $container_size[$i],
+                'status' => $container_status[$i],
+                'vehicle_no' => '',
+                'trucking_mode' => '',
+                'date' => $date_array[$i],
+                'loading_port' => $container_loading[$i],
+                'off_loading_port' => $container_offload[$i],
+                'party' => '',
+                'remarks' => '',
+                'container_weight' => $weight[$i],
+                'cross_stuffing_status' => $cross_stuffing_status[$i],
+                'detention_start_date' => $detention_date[$i],
+            ];
+            
             try {
                 BookingContainers::create($manual_data);
                 $alert = array(
@@ -447,7 +480,7 @@ order by bookings.id desc");
 
     public function trash($id = 0)
     {
-        access_guard(28);
+        access_guard(254);
         DB::beginTransaction();
          try {
             Booking::find($id)->delete();
@@ -468,7 +501,7 @@ order by bookings.id desc");
 
     public function trashContainer($id = 0)
     {
-        access_guard(28);
+        access_guard(254);
         DB::beginTransaction();
          try {
             BookingContainers::find($id)->delete();

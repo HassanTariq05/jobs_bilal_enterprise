@@ -17,6 +17,8 @@ use App\Models\JobInvoice;
 use App\Models\JobInvoiceDetail;
 use App\Models\JobPerformance;
 use App\Models\JobPerformanceSheetData;
+use Redirect;
+use URL;
 
 class JobInvoiceContainerBreakupController extends Controller
 {
@@ -105,12 +107,30 @@ class JobInvoiceContainerBreakupController extends Controller
             $rows = JobPerformanceSheetData::whereRaw($where)->get();
         }
 
+        $rows1 = array();
         if (isset($_REQUEST['cic'])) {
             $cic = $_REQUEST['cic'];
             $heads_rates = JobInvoiceContainerBreakup::where('container_item_code', $cic)->get();
+
+            foreach($rows as $r):
+                $found = 0;
+                foreach($heads_rates as $hr):
+                    $heads_rate_items = JobInvoiceContainerBreakupItem::where('job_invoice_container_breakup_id', $hr->id)->get();
+                    foreach($heads_rate_items as $hri):
+                        if($r->container_no == $hri->container_no) {
+                            $found = 1;
+                        }
+                    endforeach;
+                endforeach;
+                if(!$found) {
+                    array_push($rows1, $r);
+                }
+            endforeach;
         }
 
-        return view($this->root . 'add', compact('job', 'inv', 'rows', 'heads_rates', 'xitems_array'));
+        $rows = $rows1;
+
+        return view($this->root . 'add', compact('job', 'rows', 'heads_rates', 'xitems_array', 'inv'));
     }
 
     /**
@@ -387,6 +407,67 @@ class JobInvoiceContainerBreakupController extends Controller
              );
          }
          return back()->with($alert);
+    }
+
+    public function download($jobId, $invId, $cic) {
+
+        $heads_rates = JobInvoiceContainerBreakup::where('container_item_code', $cic)->get();
+        $path = storage_path('app/public/head_rates_breakdowns/');
+
+        $fileName = $cic.'.csv';
+
+        $file = fopen($path.$fileName, 'w');
+
+        $columns = array('Head', 'Description', 'Rate', 'Qty', 'Amount Excluded Tax', 'Tax', 'Invoice Amount');
+        fputcsv($file, $columns);
+
+        foreach($heads_rates as $row):
+            $data = array(
+                    $row->account_title->title,
+                    $row->description,
+                    $row->rate,
+                    $row->qty,
+                    $row->amount,
+                    $row->tax,
+                    $row->net,
+                );
+            fputcsv($file, $data);
+            fputcsv($file, array("", "", "", "", "", "", ""));
+
+            $columns = array('', 'BL #', 'Container #', 'Size', 'Status', 'Vehicle #', 'Trucking Mode', 'Date', 'Loading Port', 'Off Loading Port', 'Party', 'Remarks', 'Rate');
+            fputcsv($file, $columns);
+
+            $heads_rate_items = JobInvoiceContainerBreakupItem::where('job_invoice_container_breakup_id', $row->id)->get();
+            foreach($heads_rate_items as $row1):
+                $data = array(
+                    "",
+                    $row1->bl_no,
+                    $row1->container_no,
+                    $row1->size,
+                    $row1->status,
+                    $row1->vehicle_no,
+                    $row1->trucking_mode,
+                    $row1->date,
+                    $row1->loading_port,
+                    $row1->off_loading_port,
+                    $row1->party,
+                    $row1->remarks,
+                    $row1->rate,
+                );
+            fputcsv($file, $data);
+            endforeach;
+
+            fputcsv($file, array("", "", "", "", "", "", ""));
+            fputcsv($file, array("", "", "", "", "", "", ""));
+
+        endforeach;
+
+        fclose($file);
+
+        $url = 'storage/head_rates_breakdowns/'.$cic.'.csv';
+
+        return redirect("/".$url);
+        
     }
 
 

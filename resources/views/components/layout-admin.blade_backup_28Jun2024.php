@@ -725,6 +725,7 @@ $segs = [
       serverSide: false,
       paging: true,
       pageLength: 100,
+      bRetrieve: true,
       layout: {
         topStart: {
           buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
@@ -737,6 +738,7 @@ $segs = [
       serverSide: false,
       paging: true,
       pageLength: 100,
+      bRetrieve: true,
       layout: {
         topStart: {
           buttons: ['copy', 'csv', 'excel', 'pdf', 'print']

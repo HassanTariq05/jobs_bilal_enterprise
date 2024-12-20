@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WorkOrdersController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
@@ -110,6 +111,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/add', 'create')->name('create-booking');
             Route::post('/add', 'store')->name('store-booking');
             Route::post('/add-manually', 'store_manually')->name('store-booking-manually'); 
+            Route::post('/update-containers-manually', 'update_containers_manually')->name('update-containers-manually'); 
             Route::get('/edit/{id}', 'edit')->name('edit-booking');
             Route::post('/edit/{id}', 'update')->name('update-booking');
 
@@ -184,6 +186,8 @@ Route::middleware(['auth'])->group(function () {
 
             //Route::get('/trash/{breakup_id}', 'trash')->name('trash-job-invoice-detail-container-breakup');
             //Route::get('/restore/{breakup_id}', 'restore')->name('restore-job-invoice-detail-container-breakup');
+
+            Route::get('/download/{cic}', 'download')->name('download-job-invoice-detail-container-breakup');
 
         });
         Route::get('/job/invoice/detail/container-breakup/trash/{id}/{cic}', 'trash')->name('trash-job-invoice-detail-container-breakup');
@@ -282,14 +286,26 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
+    Route::controller(WorkOrdersController::class)->group(function () {
+        Route::prefix('/work-orders')->group(function () {
+            Route::get('/all', 'index')->name("work-orders");
+            Route::get('/post/{id}', 'postWorkOrder')->name("post-work-order");
+            Route::post('/assign/{jobId}', 'assignWorkOrders')->name("assign-work-orders");
+        });
+    });
+
     Route::controller(JobPerformanceController::class)->group(function () {
         Route::prefix('/jobs/edit/{id}/performance')->group(function () {
             Route::get('/', 'index')->name('job-performance');
+            Route::get('/new', 'index2')->name('job-performance-new');
             
             Route::get('/add', 'create')->name('create-job-performance');
             Route::post('/upload-job-performance-sheet', 'upload_job_performance_sheet')->name('upload-job-performance-sheet');
             Route::post('/add', 'store')->name('store-job-performance');
             Route::get('/show/{rid}', 'show')->name('show-job-performance');
+            
+            Route::get('/containers/{bookingNumber}', 'getContainers')->name('show-containers');
+            Route::post('/containers/{bookingNumber}', 'updateContainers')->name('update-containers');
 
 
             Route::get('/download-locations-master', 'download_locations_master')->name('download-locations-master');

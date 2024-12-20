@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
+use App\Models\BookingContainers;
+use App\Models\Fleet;
+use App\Models\Job;
 use App\Models\JobPerformance;
 use App\Models\JobPerformanceSheetData;
 
@@ -19,6 +23,7 @@ use App\Exports\PartiesExport;
 
 
 use Illuminate\Support\Facades\DB;
+use Request;
 
 class JobPerformanceController extends Controller
 {
@@ -26,18 +31,90 @@ class JobPerformanceController extends Controller
      * Display a listing of the resource.
      */
     private $root = "jobs/performance/";
-    public function index($id)
+    public function index2($id)
     {
         $rows = JobPerformance::where('job_id', $id)->get();
-        return view($this->root . 'list', compact('rows'));
+        $fleet = Fleet::get();
+        
+        $job = Job::select(
+            'job_types.title as job_type',
+            'jobs.*'
+        )
+        ->leftJoin('job_types', 'job_types.id', 'jobs.job_type_id')
+        ->where('jobs.id', $id)
+        ->first();
+
+        $bookings = Booking::select(
+            'parties.title as customer_name', 
+            'locations.title as location_name', 
+            'lp.title as lp_name', 
+            'offload_l.title as offload_name', 
+            'bookings.*'
+        )
+        ->leftJoin('parties', 'parties.id', 'bookings.customer')
+        ->leftJoin('locations', 'locations.id', 'bookings.location')
+        ->leftJoin('locations as lp', 'lp.id', 'bookings.loading_port')
+        ->leftJoin('locations as offload_l', 'offload_l.id', 'bookings.off_load')
+        ->where('job_type', $job->job_type_id)
+        ->where('status', 'POST')
+        ->get();
+
+        foreach($bookings as $b):
+            $containers = BookingContainers::where('bl_no', $b->bl_no)->get();
+            $pendingContainers = BookingContainers::where('bl_no', $b->bl_no)->where('activity_status', 'PENDING')->get();
+            $b['total_containers'] = count($containers);
+            $b['pending_containers'] = count($pendingContainers);
+        endforeach;
+
+        return view($this->root . 'activity', compact('rows', 'job', 'bookings', 'fleet'));
+
+    }
+
+    public function index($id)
+    {
+        $job = Job::where('id', $id)->first();
+        $rows = JobPerformance::where('job_id', $id)->get();
+
+        return view($this->root . 'list', compact('rows', 'job'));
+
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($jobId)
     {
-        return view($this->root . 'add');
+        $job = Job::select(
+            'job_types.title as job_type',
+            'jobs.*'
+        )
+        ->leftJoin('job_types', 'job_types.id', 'jobs.job_type_id')
+        ->where('jobs.id', $jobId)
+        ->first();
+
+        $bookings = Booking::select(
+            'parties.title as customer_name', 
+            'locations.title as location_name', 
+            'lp.title as lp_name', 
+            'offload_l.title as offload_name', 
+            'bookings.*'
+        )
+        ->leftJoin('parties', 'parties.id', 'bookings.customer')
+        ->leftJoin('locations', 'locations.id', 'bookings.location')
+        ->leftJoin('locations as lp', 'lp.id', 'bookings.loading_port')
+        ->leftJoin('locations as offload_l', 'offload_l.id', 'bookings.off_load')
+        ->where('job_type', $job->job_type_id)
+        ->where('status', 'POST')
+        ->get();
+
+        foreach($bookings as $b):
+            $containers = BookingContainers::where('bl_no', $b->bl_no)->get();
+            $pendingContainers = BookingContainers::where('bl_no', $b->bl_no)->where('activity_status', 'PENDING')->get();
+            $b['total_containers'] = count($containers);
+            $b['pending_containers'] = count($pendingContainers);
+        endforeach;
+
+        return view($this->root . 'add', compact('job', 'bookings'));
     }
 
     /**
@@ -197,5 +274,51 @@ class JobPerformanceController extends Controller
     public function destroy(JobPerformance $jobPerformance)
     {
         
+    }
+
+    public function getContainers($jobId, $bookingNumber) {
+        try {
+            $containers = BookingContainers
+            ::where('booking', $bookingNumber)
+            ->where('activity_status', "PENDING")
+            ->get();
+
+            return response()->json([
+                'success' => 1,
+                'error'   => 0,
+                'message' => 'Details of the containers for booking '.$bookingNumber,
+                'data'    => ['containers' => $containers]
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => 0,
+                'error'   => 1,
+                'message' => $e->getMessage(),
+                'data'    => []
+            ]);
+        } 
+    }
+
+    public function updateContainers($jobId, $bookingNumber) {
+
+        $request = request();
+
+        for($i=0; $i<count($request->container_ids); $i++) {
+            BookingContainers
+            ::where("id", $request->container_ids[$i])
+            ->update(
+                [
+                    "vehicle_no"=>$request->vehicle_number[$i],
+                    "cross_stuffing_container_no"=>$request->cross_stuffing_container_no[$i],
+                    "activity_status"=>"CLOSED"
+                ]
+            );
+        }
+
+        $alert = array(
+            'message' => "Updated ".count($request->container_ids)." containers.",
+            'alert-type' => 'success'
+        );
+        return back()->with($alert); 
     }
 }

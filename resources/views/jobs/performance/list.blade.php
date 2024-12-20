@@ -19,6 +19,7 @@
                                 <thead>
                                     <tr>
                                         <th width="100" class="text-center">#</th>
+                                        <th>Uploaded Type</th>
                                         <th>Uploaded By</th>
                                         <th>Uploaded On</th>
                                         <th>File Name</th>
@@ -30,6 +31,7 @@
                                     @foreach($rows as $row)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
+                                        <td>{{$row->performance_type}}</td>
                                         <td>{{$row->user->name}}</td>
                                         <td>{{$row->created_at}}</td>
                                         <td>{{$row->file_temp_name}}</td>

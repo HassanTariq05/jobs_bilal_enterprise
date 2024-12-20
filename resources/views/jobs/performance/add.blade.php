@@ -68,6 +68,65 @@
             </form>
         </div>
     </div>
+    <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Assign Work Orders </h5>
+                                <h4>List of all processed work orders ({{ $job->job_type }}) </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <form id="assign_work_orders" method="post" action="{{route('assign-work-orders', [$job->id], )}}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped table-sm data-table" id="table-1">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Check</th>
+                                            <th>Date</th>
+                                            <th>Customer</th>
+                                            <th>Location</th>
+                                            <th>BL Date</th>
+                                            <th>Booking Date</th>
+                                            <th>Loading Port</th>
+                                            <th>Offload</th>
+                                            <th>Booking</th>
+                                            <th>No. of Containers</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if($bookings->count())
+                                        @foreach($bookings as $row)
+                                        <tr>
+                                            <td class="text-center"><input name="checked[{{$row->id}}]" type="checkbox"/></td>
+                                            <td>{{$row->date}}</td>
+                                            <td>{{$row->customer_name}}</td>
+                                            <td>{{$row->location_name}}</td>
+                                            <td>{{$row->date}}</td>
+                                            <td>{{$row->created_at}}</td>
+                                            <td>{{$row->lp_name}}</td>
+                                            <td>{{$row->offload_name}}</td>
+                                            <td>{{$row->booking}}</td>
+                                            <td class="text-center">{{$row->total_containers}}</td>
+                                        </tr>
+                                        @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="containers-modal-footer" class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Assign Work Orders</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     <?php
     $errors_report = [];
     $error = 0;

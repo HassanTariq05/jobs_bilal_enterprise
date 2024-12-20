@@ -15,7 +15,8 @@ class JobPerformance extends Model
         'file_original_name',
         'file_original_ext',
         'file_temp_name',
-        'stored_file'
+        'stored_file',
+        'performance_type'
     ];
 
     public function items()
