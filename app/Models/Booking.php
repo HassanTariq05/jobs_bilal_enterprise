@@ -11,6 +11,7 @@ class Booking extends Model
     protected $fillable = [
         'booking',
         'bl_no',
+        'custom_bl',
         'loading_port',
         'off_load',
         'customer',

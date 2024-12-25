@@ -41,37 +41,39 @@ class BookingsController extends Controller
     protected $booking;
     protected $bl_prefix = "BA|BL no.";
     public function index()
-    {
-      //  echo "<h1>Hello</h1>";
-        access_guard(252);
-        $rows =  DB::select("
-SELECT 
-    bookings.*, 
-    loc1.short_name AS location_name,
-    loc2.short_name AS off_load_name,
-    loc3.short_name AS loading_port_name,
-    parties.title AS customer_name,
-    jt.title AS job_type_title
-FROM 
-    bookings
-JOIN 
-    locations AS loc1 ON bookings.location = loc1.id 
-JOIN 
-    locations AS loc2 ON bookings.off_load = loc2.id 
-JOIN 
-    locations AS loc3 ON bookings.loading_port = loc3.id 
-JOIN 
-    parties ON bookings.customer = parties.id
-LEFT JOIN 
-    job_types AS jt ON bookings.job_type = jt.id
-    WHERE bookings.status like 'PENDING'
-order by bookings.id desc");
+{
+    access_guard(252);
 
-        return view($this->root . 'list', compact('rows'));
-   
-  //   dd($rows);
-//        echo json_encode([$rows]);
-    }
+    // Modify the SQL to include the custom_bl column
+    $rows = DB::select("
+        SELECT 
+            bookings.*, 
+            loc1.short_name AS location_name,
+            loc2.short_name AS off_load_name,
+            loc3.short_name AS loading_port_name,
+            parties.title AS customer_name,
+            jt.title AS job_type_title
+        FROM 
+            bookings
+        JOIN 
+            locations AS loc1 ON bookings.location = loc1.id 
+        JOIN 
+            locations AS loc2 ON bookings.off_load = loc2.id 
+        JOIN 
+            locations AS loc3 ON bookings.loading_port = loc3.id 
+        JOIN 
+            parties ON bookings.customer = parties.id
+        LEFT JOIN 
+            job_types AS jt ON bookings.job_type = jt.id
+        WHERE 
+            bookings.status LIKE 'PENDING'
+        ORDER BY 
+            bookings.id DESC
+    ");
+
+    return view($this->root . 'list', compact('rows'));
+}
+
 
     public function create() {
         access_guard(253);
@@ -154,6 +156,7 @@ order by bookings.id desc");
         $data = [
             'booking' => $booking,
             'bl_no' => $bl_no,
+            'custom_bl' => $request->bl_no,
             'loading_port' => $request->loading_port,
             'off_load' => $request->off_load,
             'customer' => $request->customer,

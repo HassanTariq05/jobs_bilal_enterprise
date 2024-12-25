@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FuelPurchase;
 use App\Http\Requests\StoreFuelPurchaseRequest;
 use App\Http\Requests\UpdateFuelPurchaseRequest;
+use App\Models\Party;
 
 use Illuminate\Support\Facades\DB;
 
@@ -27,7 +28,13 @@ class FuelPurchaseController extends Controller
     public function create()
     {
         access_guard(122);
-        return view($this->root.'add');
+        $vendors = Party::where('party_type_id', 2)->get();
+        $selected = old('party_id');
+        $ref = 'party_id';
+        $label = 'Vendor';
+        $autofocus = 'party_id';
+        // dd($vendors);
+        return view($this->root . 'add', compact('vendors', 'selected', 'ref', 'label', 'autofocus'));
     }
 
     /**
@@ -74,8 +81,22 @@ class FuelPurchaseController extends Controller
         if(!$row){
             return redirect()->route('fuel-purchases');
         }
-        return view($this->root.'edit', compact('row'));
+
+        $vendors = Party::where('party_type_id', 2)->get();
+
+        $selectedParty = old('party_id', $row->party_id);
+        $selectedFuelType = old('fuel_type_id', $row->fuel_type_id);
+        $selectedTank = old('tank_id', $row->tank_id);
+
+        $ref = 'party_id';
+        $label = 'Vendor';
+        $autofocus = 'party_id';
+
+        return view($this->root.'edit', compact(
+            'row', 'vendors', 'selectedParty', 'selectedFuelType', 'selectedTank', 'ref', 'label', 'autofocus'
+        ));
     }
+
 
     /**
      * Update the specified resource in storage.

@@ -19,8 +19,24 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <x-combobox of="parties" label="Vendor" ref="party_id" inline=0 />
+                                <div class="form-group">
+                                    <label for="{{ $ref }}">{{ $label }}</label>
+                                    <select class="form-control select2" id="{{ $ref }}" name="{{ $ref }}" {{ $autofocus ? 'autofocus' : '' }} style="width:100%">
+                                        <option value="">--select--</option>
+                                        @foreach($vendors as $vendor)
+                                            <option 
+                                                value="{{ $vendor->id }}" 
+                                                @if(isset($selected) && $selected == $vendor->id) selected @endif>
+                                                {{ $vendor->title ?? $vendor->name ?? 'N/A' }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error($ref)
+                                    <div class="text-danger">required</div>
+                                    @enderror
+                                </div>
                             </div>
+                            
                             <div class="col-md-6">
                                 <x-combobox of="fuel_types" label="Fuel Type" ref="fuel_type_id" inline=0 />
                             </div>
@@ -103,3 +119,10 @@
         </div>
     </div>
 </x-layout-admin>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#{{ $ref }}').select2();
+    });
+</script>

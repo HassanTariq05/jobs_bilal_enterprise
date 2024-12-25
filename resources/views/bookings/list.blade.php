@@ -22,6 +22,7 @@
                                     <th width="100" class="text-center">#</th>
                                     <th>Booking</th>
                                     <th>BL No</th>
+                                    <th>Custom BL No</th>
                                     <th>Loading Port</th>
                                     <th>off Load</th>
                                     <th>Customer</th>
@@ -39,6 +40,7 @@
                                     <td class="text-center">{{$loop->iteration}}</td>
                                     <td>{{$row->booking}}</td>
                                     <td>{{$row->bl_no}}</td>
+                                    <td>{{$row->custom_bl}}</td>
                                     <td>{{$row->loading_port_name}}</td>
                                     <td>{{$row->off_load_name}}</td>
                                     <td>{{$row->customer_name}}</td>
