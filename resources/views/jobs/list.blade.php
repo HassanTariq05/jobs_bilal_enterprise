@@ -124,17 +124,13 @@
                                                 <td class="text-right">@money($jt['payable'])</td>
                                                 <td class="text-right">@money($net)</td>
                                                 <td class="text-center">
-
-                                                    <?php if ($c < 2) { ?>
-                                                        <?php if ($job->approved) { ?>
-                                                            <a href="{{route('edit-job', [$job->id])}}" class="btn btn-icon  btn-sm btn-dark">
-                                                                <i class="far fa-eye"></i>
-                                                            </a>
-                                                        <?php } else { ?>
-                                                            <x-action-btn route="job" id="{{$job->id}}" privilegeEditId=69 privilegeDeleteId=70  privilegeRestoreId="{{$row->deleted_at ? 71 : 0}}" />
-                                                        <?php } ?>
+                                                    <?php if ($job->approved) { ?>
+                                                        <a href="{{route('edit-job', [$job->id])}}" class="btn btn-icon btn-sm btn-dark">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    <?php } else { ?>
+                                                        <x-action-btn route="job" id="{{$job->id}}" privilegeEditId=69 privilegeDeleteId=70 privilegeRestoreId="{{$row->deleted_at ? 71 : 0}}" />
                                                     <?php } ?>
-
                                                 </td>
                                             </tr>
                                             @endforeach
