@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBookingRequest;
+use App\Http\Requests\UpdateBookingRequest;
 use Exception;
 use Illuminate\Http\Request;
 use App\Models\Booking;
@@ -33,6 +34,7 @@ use App\Imports\JobPerformanceImport;
 
 use Illuminate\Support\Facades\DB;
 
+use function Laravel\Prompts\select;
 
 class BookingsController extends Controller
 {
@@ -40,39 +42,59 @@ class BookingsController extends Controller
     private $root = "bookings/";
     protected $booking;
     protected $bl_prefix = "BA|BL no.";
+
     public function index()
-{
-    access_guard(252);
+    {
+        access_guard(252);
 
-    // Modify the SQL to include the custom_bl column
-    $rows = DB::select("
-        SELECT 
-            bookings.*, 
-            loc1.short_name AS location_name,
-            loc2.short_name AS off_load_name,
-            loc3.short_name AS loading_port_name,
-            parties.title AS customer_name,
-            jt.title AS job_type_title
-        FROM 
-            bookings
-        JOIN 
-            locations AS loc1 ON bookings.location = loc1.id 
-        JOIN 
-            locations AS loc2 ON bookings.off_load = loc2.id 
-        JOIN 
-            locations AS loc3 ON bookings.loading_port = loc3.id 
-        JOIN 
-            parties ON bookings.customer = parties.id
-        LEFT JOIN 
-            job_types AS jt ON bookings.job_type = jt.id
-        WHERE 
-            bookings.status LIKE 'PENDING'
-        ORDER BY 
-            bookings.id DESC
-    ");
+        // Modify the SQL to include the custom_bl column
+        $rows = DB::select("
+            SELECT 
+                bookings.*, 
+                loc1.short_name AS location_name,
+                loc2.short_name AS off_load_name,
+                loc3.short_name AS loading_port_name,
+                parties.title AS customer_name,
+                jt.title AS job_type_title
+            FROM 
+                bookings
+            JOIN 
+                locations AS loc1 ON bookings.location = loc1.id 
+            JOIN 
+                locations AS loc2 ON bookings.off_load = loc2.id 
+            JOIN 
+                locations AS loc3 ON bookings.loading_port = loc3.id 
+            JOIN 
+                parties ON bookings.customer = parties.id
+            LEFT JOIN 
+                job_types AS jt ON bookings.job_type = jt.id
+            WHERE 
+                bookings.status LIKE 'PENDING'
+            ORDER BY 
+                bookings.id DESC
+        ");
 
-    return view($this->root . 'list', compact('rows'));
-}
+        return view($this->root . 'list', compact('rows'));
+    }
+
+    public function list()
+    {
+        access_guard(252);
+        $containers = Db::select("SELECT bc.* from booking_containers  as bc inner join bookings as bk on bc.booking = bk.booking;");
+
+        $rows = DB::select("
+            SELECT 
+                bookings.*
+            FROM 
+                bookings
+            WHERE 
+                bookings.status LIKE 'PENDING'
+            ORDER BY 
+                bookings.id DESC
+        ");
+
+        return view($this->root . 'booking-list', compact('rows', 'containers'));
+    }
 
 
     public function create() {
@@ -88,9 +110,64 @@ class BookingsController extends Controller
 
     }
 
-    public function update() {
-    
+    public function update($id, UpdateBookingRequest $request)
+    {
+        access_guard(69);
+        DB::beginTransaction();
 
+        try {
+
+            $data = [
+                'booking' => $request->booking,
+                'bl_no' => $request->bl_no,
+                'loading_port' => $request->loading_port,
+                'off_load' => $request->off_load,
+                'customer' => $request->customer,
+                'location' => $request->location,
+                'date' => $request->date,
+                'remarks' => $request->remarks,
+            ];
+
+            Booking::where('id', $id)->update($data);
+
+            $files = [];
+            if (COUNT($request->files)) {
+                $request->validate([
+                    //'files' => 'required|mimes:pdf,xls,xlsx,doc,docx,txt|max:2048',
+                    'files' => 'required',
+                ]);
+                $fi = 0;
+                foreach ($request->file('files') as $file) {
+                    $files[$fi]['title'] = $file->getClientOriginalName();
+                    $files[$fi]['ext'] = $file->getClientOriginalExtension();
+                    $files[$fi]['path'] = $file->store('booking_' . $id, 'public');
+                    $fi++;
+                }
+                if (COUNT($files)) {
+                    foreach ($files as $file) {
+                        BookingFiles::create([
+                            'booking_id' => $id,
+                            'title' => $file['title'],
+                            'ext' => $file['ext'],
+                            'file_path' => $file['path'],
+                        ]);
+                    }
+                }
+            }
+            DB::commit();
+            $alert = array(
+                'message' => 'Saved successfully.',
+                'alert-type' => 'success'
+            );
+            return back()->with($alert);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $alert = array(
+                'message' => $e->getMessage(),
+                'alert-type' => 'error'
+            );
+            return back()->with($alert);
+        }
     }
 
     public function edit($id) {

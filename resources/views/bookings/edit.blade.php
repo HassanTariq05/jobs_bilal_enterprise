@@ -1,7 +1,7 @@
 <x-layout-admin>
     <div id="" class="row">
         <div class="col-12">
-            <form method="post" action="{{route('update-job', 26)}}" enctype="multipart/form-data">
+            <form method="post" action="{{route('update-booking', [$row[0]->id])}}" enctype="multipart/form-data">
                 @csrf
                 <div class="card">
                     <div class="card-header border-bottom">
@@ -60,9 +60,9 @@
                         </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="document_date">Document Date</label>
+                                    <label for="date">Document Date</label>
                                     <input type="date" id="date" name="date" value="{{$row[0]->date}}" class="form-control"  required/>
-                                    @error('document_date')
+                                    @error('date')
                                     <div class="text-danger">required</div>
                                     @enderror
                                 </div>

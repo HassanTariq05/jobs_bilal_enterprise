@@ -313,6 +313,10 @@ $segs = [
                   <li class="@if($seg1=='bookings' && $seg2=='') active @endif"><a class="nav-link" href="{{route('bookings')}}">Booking Queue</a></li>
                 <?php } ?>
 
+                <?php if (has_permission(252)) { ?>
+                  <li class="@if($seg1=='bookings' && $seg2=='list') active @endif"><a class="nav-link" href="{{route('booking-list')}}">Booking List</a></li>
+                <?php } ?>
+
                 <?php if (has_permission(253)) { ?>
                   <li class="@if($seg1=='bookings' && $seg2=='add') active @endif"><a class="nav-link" href="{{route('create-booking')}}">Add New Booking</a></li>
                 <?php } ?>

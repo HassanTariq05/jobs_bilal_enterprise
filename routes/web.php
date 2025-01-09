@@ -104,6 +104,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(BookingsController::class)->group(function () {
         Route::prefix('/bookings')->group(function () {
             Route::get('/', 'index')->name('bookings');
+            Route::get('/list', 'list')->name('booking-list');
             Route::post('/', 'index')->name('search');
             // Route::get('/job-queue', 'job_queue')->name('job-queue');
             Route::post('/get-booking-containers', 'booking_containers')->name('job-queue');
