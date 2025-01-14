@@ -1,25 +1,11 @@
-<?php if (isset($component)) { $__componentOriginald512d371ecbc414f6bdb34c51590ff29 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginald512d371ecbc414f6bdb34c51590ff29 = $attributes; } ?>
-<?php $component = App\View\Components\LayoutAdmin::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('layout-admin'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\App\View\Components\LayoutAdmin::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes([]); ?>
+<x-layout-admin>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4>Bookings</h4>
-                        </div>
-                        <div class="col-md-6 text-right">
-                            <?php if (has_permission(26)) { ?>
-                                <a href="<?php echo e(route('create-booking')); ?>" class="btn btn-sm btn-primary">Add New</a>
-                            <?php } ?>
+                            <h4>Bookings-Summary</h4>
                         </div>
                     </div>
                 </div>
@@ -30,44 +16,31 @@
                                 <tr>
                                     <th width="100" class="text-center">#</th>
                                     <th>Booking</th>
-                                    <th>BL No</th>
-                                    <th>Loading Port</th>
-                                    <th>off Load</th>
-                                    <th>Customer</th>
-                                    <th>Job Type</th>
-                                    <th>Location</th>
-                                    <th>Date</th>
-                                    <th>View</th>
-                                    <th>Edit</th>
+                                    <th width="100">BL No</th>
+                                    <th>Custom BL No</th>
+                                    <th>Containers</th>
+                                    <th>Invoices</th>
+                                    <th>Payments</th>
+                                    <th>Rate Applied</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if($rows): ?>
-                                <?php $__currentLoopData = $rows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                @if($rows)
+                                @foreach($rows as $row)
                                 <tr>
-                                    <td class="text-center"><?php echo e($loop->iteration); ?></td>
-                                    <td><?php echo e($row->booking); ?></td>
-                                    <td><?php echo e($row->bl_no); ?></td>
-                                    <td><?php echo e($row->loading_port_name); ?></td>
-                                    <td><?php echo e($row->off_load_name); ?></td>
-                                    <td><?php echo e($row->customer_name); ?></td>
-                                    <td><?php echo e($row->job_type_title); ?></td>
-                                    <td><?php echo e($row->location_name); ?></td>
-                                    <td><?php echo e($row->date); ?></td>
-                                    <td>
-                                        <span class="btn btn-icon btn-sm" style="padding-left: 10px" onclick="booking_container('<?php echo e($row->booking); ?>')" ;>
-                                            <i class="fa fa-eye"></i>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <a href="<?php echo e(route('edit-booking', [$row->id])); ?>" class="btn btn-icon  btn-sm btn-dark">
-                                            <i class="far fa-edit"></i>
-                                        </a>
-                                    </td>
-
+                                    <td class="text-center">{{$loop->iteration}}</td>
+                                    <td>{{$row->booking}}</td>
+                                    <td>{{$row->bl_no}}</td>
+                                    <td>{{$row->custom_bl}}</td>
+                                    <td>{{$row->containers_count}}</td>
+                                    <td>{{$row->invoices_count}}</td>
+                                    <td>{{$row->payments_count}}</td>
+                                    <td>{{$row->rates_applied_count}}</td>
+                                    <td>{{$row->status}}</td>
                                 </tr>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <?php endif; ?>
+                                @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -121,6 +94,9 @@
     </div>
     <!--  -->
     <script>
+        <?php
+            ini_set('memory_limit', '256M'); // Increase memory limit for the entire script
+        ?>
 
         function booking_container(bl_no) {
             //var dataInput = $("#data_input").val(); // Get input value
@@ -205,7 +181,7 @@
             let container_id = container.getAttribute('container_id')
             let num_value = selected_ownership.id.split('_').pop(); // Get the last part after "_"
             const vehicle_no_input = document.getElementById(`vehicle_no_container_${num_value}`);
-            
+
             // let result = text.substr(text.length-1, 1);
 
             console.log(selected_ownership)
@@ -218,26 +194,18 @@
             }
 
             if (selected_ownership.value == "1") {
-                    vehicle_no = `<td><input id = "vehicle_no_container_${num_value}" style = "height:40px" type = "text" oninput = "validate_vehicle(this)" placeholder = "Input for Owned"></input></td>`
-                } else {
-                    vehicle_no = `<td><input id = "vehicle_no_container_${num_value}" style = "height:40px" type = "text" oninput = "validate_vehicle(this)"  placeholder = "Input for private"></input></td>`
+                vehicle_no = `<td><input id = "vehicle_no_container_${num_value}" style = "height:40px" type = "text" oninput = "validate_vehicle(this)" placeholder = "Input for Owned"></input></td>`
+            } else {
+                vehicle_no = `<td><input id = "vehicle_no_container_${num_value}" style = "height:40px" type = "text" oninput = "validate_vehicle(this)"  placeholder = "Input for private"></input></td>`
 
-                }
-                container.innerHTML += vehicle_no
+            }
+            container.innerHTML += vehicle_no
         }
 
         function validate_vehicle(vehicle_date) {
             let vehicle_no = vehicle_date.value
             console.log("Vehicle No " + vehicle_no)
         }
+
     </script>
- <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginald512d371ecbc414f6bdb34c51590ff29)): ?>
-<?php $attributes = $__attributesOriginald512d371ecbc414f6bdb34c51590ff29; ?>
-<?php unset($__attributesOriginald512d371ecbc414f6bdb34c51590ff29); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginald512d371ecbc414f6bdb34c51590ff29)): ?>
-<?php $component = $__componentOriginald512d371ecbc414f6bdb34c51590ff29; ?>
-<?php unset($__componentOriginald512d371ecbc414f6bdb34c51590ff29); ?>
-<?php endif; ?><?php /**PATH C:\Users\Owais\Downloads\BE\jobs\jobs\resources\views/bookings/list.blade.php ENDPATH**/ ?>
+</x-layout-admin>

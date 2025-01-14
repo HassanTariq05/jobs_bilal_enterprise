@@ -313,12 +313,12 @@ $segs = [
                   <li class="@if($seg1=='bookings' && $seg2=='') active @endif"><a class="nav-link" href="{{route('bookings')}}">Booking Queue</a></li>
                 <?php } ?>
 
-                <?php if (has_permission(252)) { ?>
-                  <li class="@if($seg1=='bookings' && $seg2=='list') active @endif"><a class="nav-link" href="{{route('booking-list')}}">Booking List</a></li>
-                <?php } ?>
-
                 <?php if (has_permission(253)) { ?>
                   <li class="@if($seg1=='bookings' && $seg2=='add') active @endif"><a class="nav-link" href="{{route('create-booking')}}">Add New Booking</a></li>
+                <?php } ?>
+
+                <?php if (has_permission(252)) { ?>
+                  <li class="@if($seg1=='bookings' && $seg2=='summary') active @endif"><a class="nav-link" href="{{route('booking-summary')}}">Booking Summary</a></li>
                 <?php } ?>
                 
               </ul>
@@ -353,6 +353,14 @@ $segs = [
                   <li @if($seg2=='receipts' && $seg3=='add' ) class="active" @endif>
                     <a class="nav-link" href="{{route('create-job-receipt')}}">
                       Add New
+                    </a>
+                  </li>
+                <?php } ?>
+
+                <?php if (has_permission(97)) { ?>
+                  <li @if($seg2=='receipts' && $seg3=='summary' ) class="active" @endif>
+                    <a class="nav-link" href="{{route('job-receipts-summary')}}">
+                      Summary
                     </a>
                   </li>
                 <?php } ?>

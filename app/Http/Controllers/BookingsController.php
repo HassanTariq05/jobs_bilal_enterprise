@@ -77,23 +77,60 @@ class BookingsController extends Controller
         return view($this->root . 'list', compact('rows'));
     }
 
-    public function list()
+    public function summary()
     {
         access_guard(252);
-        $containers = Db::select("SELECT bc.* from booking_containers  as bc inner join bookings as bk on bc.booking = bk.booking;");
 
         $rows = DB::select("
-            SELECT 
-                bookings.*
-            FROM 
-                bookings
-            WHERE 
-                bookings.status LIKE 'PENDING'
-            ORDER BY 
-                bookings.id DESC
+            SELECT bookings.* 
+            FROM bookings 
+            ORDER BY bookings.id DESC
         ");
 
-        return view($this->root . 'booking-list', compact('rows', 'containers'));
+        foreach ($rows as $row) {
+            // Rates Applied Count
+            $rateAppliedQuery = "
+                SELECT COUNT(*) AS rates_applied_count 
+                FROM job_invoice_container_breakup_items AS jicbi
+                WHERE jicbi.bl_no LIKE :bl_no
+            ";
+            $ratesApplied = DB::select($rateAppliedQuery, ['bl_no' => $row->bl_no]);
+            $row->rates_applied_count = $ratesApplied[0]->rates_applied_count ?? 0;
+
+            // Containers Count
+            $containerQuery = "
+                SELECT COUNT(*) AS containers_count 
+                FROM booking_containers AS bc
+                WHERE bc.booking = :booking
+            ";
+            $containersCount = DB::select($containerQuery, ['booking' => $row->booking]);
+            $row->containers_count = $containersCount[0]->containers_count ?? 0;
+
+            // Invoices Count
+            $invoiceQuery = "
+                SELECT COUNT(*) AS invoices_count 
+                FROM jobs.job_invoices AS ji
+                INNER JOIN jobs.job_invoice_container_breakups AS jicb ON jicb.job_invoice_id = ji.id
+                INNER JOIN jobs.job_invoice_container_breakup_items AS jicbi ON jicbi.job_invoice_container_breakup_id = jicb.id
+                WHERE jicbi.bl_no LIKE :bl_no
+            ";
+            $invoicesCount = DB::select($invoiceQuery, ['bl_no' => $row->bl_no]);
+            $row->invoices_count = $invoicesCount[0]->invoices_count ?? 0;
+
+            // Payments Count
+            $paymentQuery = "
+                SELECT COUNT(*) AS payments_count 
+                FROM jobs.job_bills AS jb
+                INNER JOIN jobs.job_bill_container_breakups AS jbcb ON jbcb.job_bill_id = jb.id
+                INNER JOIN jobs.job_bill_container_breakup_items AS jbcbi ON jbcbi.job_bill_container_breakup_id = jbcb.id
+                WHERE jbcbi.bl_no LIKE :bl_no
+            ";
+            $paymentsCount = DB::select($paymentQuery, ['bl_no' => $row->bl_no]);
+            $row->payments_count = $paymentsCount[0]->payments_count ?? 0;
+        }
+
+
+        return view($this->root . 'booking-summary', compact('rows'));
     }
 
 

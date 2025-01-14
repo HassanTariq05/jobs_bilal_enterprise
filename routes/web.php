@@ -104,7 +104,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(BookingsController::class)->group(function () {
         Route::prefix('/bookings')->group(function () {
             Route::get('/', 'index')->name('bookings');
-            Route::get('/list', 'list')->name('booking-list');
+            Route::get('/summary', 'summary')->name('booking-summary');
             Route::post('/', 'index')->name('search');
             // Route::get('/job-queue', 'job_queue')->name('job-queue');
             Route::post('/get-booking-containers', 'booking_containers')->name('job-queue');
@@ -205,6 +205,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(JobInvoiceReceiptController::class)->group(function () {
         Route::prefix('/jobs/receipts')->group(function () {
             Route::get('/', 'index')->name('job-receipts');
+            Route::get('/summary', 'summary')->name('job-receipts-summary');
 
             Route::get('/add', 'create')->name('create-job-receipt');
             Route::post('/add', 'store')->name('store-job-receipt');
@@ -793,7 +794,13 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/trash/{id}', 'trash')->name('trash-journal-voucher');
             Route::get('/restore/{id}', 'restore')->name('restore-journal-voucher');
         });
-    });     
+    });
+    
+    Route::controller(JobInvoiceController::class)->group(function () {
+        Route::prefix('/jobs/invoice')->group(function () {
+            Route::get('/', 'summary')->name('invoice-summary');
+        });
+    });
 
 
     Route::controller(VoucherTypeController::class)->group(function () {

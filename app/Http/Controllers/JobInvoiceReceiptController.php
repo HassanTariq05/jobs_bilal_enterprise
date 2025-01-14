@@ -27,6 +27,40 @@ class JobInvoiceReceiptController extends Controller
         return view($this->root . 'list', compact('rows'));
     }
 
+    public function summary()
+    {
+        access_guard(252);
+
+        $rows = DB::select("SELECT * from job_invoices order by id desc limit 100");
+
+
+        foreach ($rows as $row) {
+
+            $itemsQuery = "
+                SELECT count(*) item_count FROM 
+                jobs.job_invoice_container_breakup_items as jicbi
+                inner join jobs.job_invoice_container_breakups as jicb
+                on jicb.id = jicbi.job_invoice_container_breakup_id
+                where jicb.job_invoice_id = $row->id;
+            ";
+            $itemCounts = DB::select($itemsQuery);
+
+            $receiptsQuery = "
+            SELECT count(*) receipt_count FROM jobs.job_invoice_receipt_details where job_invoice_id = $row->id;
+            ";
+            $receiptCounts = DB::select($receiptsQuery);
+
+            $row->items_count = $itemCounts[0]->item_count;
+            $row->receipt_count = $receiptCounts[0]->receipt_count;
+        }
+
+        return view($this->root . 'summary', compact('rows'));
+    }
+
+
+
+
+
     /**
      * Show the form for creating a new resource.
      */

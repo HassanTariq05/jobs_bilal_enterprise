@@ -1,89 +1,47 @@
-<?php if (isset($component)) { $__componentOriginald512d371ecbc414f6bdb34c51590ff29 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginald512d371ecbc414f6bdb34c51590ff29 = $attributes; } ?>
-<?php $component = App\View\Components\LayoutAdmin::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('layout-admin'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\App\View\Components\LayoutAdmin::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes([]); ?>
+<x-layout-admin>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4>Bookings</h4>
-                        </div>
-                        <div class="col-md-6 text-right">
-                            <?php if (has_permission(26)) { ?>
-                                <a href="<?php echo e(route('create-booking')); ?>" class="btn btn-sm btn-primary">Add New</a>
-                            <?php } ?>
+                            <h4>Invoices Summary</h4>
                         </div>
                     </div>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="data-table table table-hover table-striped table-sm " id="table-1">
+                        <table class="data-table table table-hover table-striped table-sm" id="table-1">
                             <thead>
                                 <tr>
                                     <th width="100" class="text-center">#</th>
-                                    <th>Booking</th>
-                                    <th>BL No</th>
-                                    <th>Loading Port</th>
-                                    <th>off Load</th>
-                                    <th>Customer</th>
-                                    <th>Job Type</th>
-                                    <th>Location</th>
-                                    <th>Date</th>
-                                    <th>View</th>
-                                    <th class="text-center align-center">Action</th>
+                                    <th>Invoice No</th>
+                                    <th>Items</th>
+                                    <th>Receipts</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if($rows): ?>
-                                <?php $__currentLoopData = $rows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <tr>
-                                    <td class="text-center"><?php echo e($loop->iteration); ?></td>
-                                    <td><?php echo e($row->booking); ?></td>
-                                    <td><?php echo e($row->bl_no); ?></td>
-                                    <td><?php echo e($row->loading_port_name); ?></td>
-                                    <td><?php echo e($row->off_load_name); ?></td>
-                                    <td><?php echo e($row->customer_name); ?></td>
-                                    <td><?php echo e($row->job_type_title); ?></td>
-                                    <td><?php echo e($row->location_name); ?></td>
-                                    <td><?php echo e($row->date); ?></td>
-                                    <td>
-                                        <span class="btn btn-icon btn-sm" style="padding-left: 10px" onclick="booking_container('<?php echo e($row->booking); ?>')" ;>
-                                            <i class="fa fa-eye"></i>
-                                        </span>
-                                    </td>
-                                    <td>
-                                    <?php if (isset($component)) { $__componentOriginale7837355806eb9c5fed48e334bc15690 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginale7837355806eb9c5fed48e334bc15690 = $attributes; } ?>
-<?php $component = App\View\Components\ActionBtn::resolve(['route' => 'booking','id' => ''.e($row->id).'','privilegeEditId' => '69','privilegeDeleteId' => '70'] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('action-btn'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\App\View\Components\ActionBtn::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes([]); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginale7837355806eb9c5fed48e334bc15690)): ?>
-<?php $attributes = $__attributesOriginale7837355806eb9c5fed48e334bc15690; ?>
-<?php unset($__attributesOriginale7837355806eb9c5fed48e334bc15690); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginale7837355806eb9c5fed48e334bc15690)): ?>
-<?php $component = $__componentOriginale7837355806eb9c5fed48e334bc15690; ?>
-<?php unset($__componentOriginale7837355806eb9c5fed48e334bc15690); ?>
-<?php endif; ?>
-                                    </td>
-                                </tr>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <?php endif; ?>
+                                @if($rows && count($rows) > 0)
+                                    @foreach($rows as $index => $row)
+                                        <tr>
+                                            <td class="text-center">{{ $index + 1 }}</td>
+                                            <td>{{ $row->inv_no }}</td>
+                                            <td>{{ $row->items_count ?? 0 }}</td>
+                                            <td>{{ $row->receipt_count ?? 0 }}</td>
+                                            <td>
+                                                <a href="{{route('invoice-generate-pdf', $row->id)}}" class="dropdown-item" title="Edit Invoice List Items">
+                                                    <i class="far fa-file-pdf mr-2"></i>
+                                                    Generate Invoice PDF
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="5" class="text-center">No records found</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -246,13 +204,4 @@
             console.log("Vehicle No " + vehicle_no)
         }
     </script>
- <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginald512d371ecbc414f6bdb34c51590ff29)): ?>
-<?php $attributes = $__attributesOriginald512d371ecbc414f6bdb34c51590ff29; ?>
-<?php unset($__attributesOriginald512d371ecbc414f6bdb34c51590ff29); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginald512d371ecbc414f6bdb34c51590ff29)): ?>
-<?php $component = $__componentOriginald512d371ecbc414f6bdb34c51590ff29; ?>
-<?php unset($__componentOriginald512d371ecbc414f6bdb34c51590ff29); ?>
-<?php endif; ?><?php /**PATH /Users/i2p/Downloads/jobs/jobs/resources/views/bookings/list.blade.php ENDPATH**/ ?>
+</x-layout-admin>
