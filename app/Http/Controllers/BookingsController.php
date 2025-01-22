@@ -82,9 +82,15 @@ class BookingsController extends Controller
         access_guard(252);
 
         $rows = DB::select("
-            SELECT bookings.* 
-            FROM bookings 
-            ORDER BY bookings.id DESC
+            SELECT 
+                bookings.*,
+                parties.title AS customer_name
+            FROM
+                bookings 
+            JOIN 
+                parties ON bookings.customer = parties.id
+            ORDER BY 
+                bookings.id DESC
         ");
 
         foreach ($rows as $row) {
@@ -133,6 +139,47 @@ class BookingsController extends Controller
         return view($this->root . 'booking-summary', compact('rows'));
     }
 
+    public function show($id)
+    {
+        try {
+            if (!is_numeric($id)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid ID format.',
+                ], 400);
+            }
+
+            $containerQuery = "
+                SELECT 
+                    bc.container_no, 
+                    bc.size, 
+                    bc.status, 
+                    bc.date, 
+                    bc.loading_port, 
+                    bc.off_loading_port, 
+                    bc.container_weight, 
+                    bc.cross_stuffing_status, 
+                    bc.detention_start_date
+                FROM booking_containers AS bc
+                WHERE bc.booking = :id
+            ";
+
+            $containers = DB::select($containerQuery, ['id' => $id]);
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'containers' => $containers,
+                ],
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
 
     public function create() {
         access_guard(253);
@@ -143,7 +190,6 @@ class BookingsController extends Controller
 
 
         return view($this->root . 'add', compact('location', 'parties', 'container_sizes'));
-
 
     }
 
@@ -434,6 +480,7 @@ class BookingsController extends Controller
         $data = [
             'booking' => $booking,
             'bl_no' => $bl_no,
+            'custom_bl' => $request->bl_no,
             'loading_port' => $request->loading_port,
             'off_load' => $request->off_load,
             'customer' => $request->customer,

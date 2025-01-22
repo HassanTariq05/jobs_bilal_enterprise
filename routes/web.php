@@ -105,6 +105,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('/bookings')->group(function () {
             Route::get('/', 'index')->name('bookings');
             Route::get('/summary', 'summary')->name('booking-summary');
+            Route::get('/summary/show/{id}', 'show')->name('show-containers');
             Route::post('/', 'index')->name('search');
             // Route::get('/job-queue', 'job_queue')->name('job-queue');
             Route::post('/get-booking-containers', 'booking_containers')->name('job-queue');
@@ -156,6 +157,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/job/invoice/generate-pdf/{id}', 'generate_invoice_pdf')->name('invoice-generate-pdf');
         Route::post('/job/invoice/generate-pdf/{id}', 'generate_invoice_pdf')->name('invoice-generate-pdf');
+
+        Route::get('/job/invoice/generate-summary-pdf/{job_id}', 'generate_invoice_summary_pdf')->name('invoice-generate-summary-pdf');
+        Route::post('/job/invoice/generate-summary-pdf/{job_id}', 'generate_invoice_summary_pdf')->name('invoice-generate-summary-pdf');
     });
 
     Route::get('/get-job-invoice-receipts/{id}', [JobInvoiceController::class, 'get_job_invoice_receipts'])->name('get-job-invoice-receipts');
@@ -206,6 +210,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('/jobs/receipts')->group(function () {
             Route::get('/', 'index')->name('job-receipts');
             Route::get('/summary', 'summary')->name('job-receipts-summary');
+            Route::get('/summary/show/{job_id}/{job_inv_id}', 'show')->name('invoice-details');
 
             Route::get('/add', 'create')->name('create-job-receipt');
             Route::post('/add', 'store')->name('store-job-receipt');

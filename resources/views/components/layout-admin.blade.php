@@ -271,7 +271,7 @@ $segs = [
                 <i class="fas fa-users"></i>
                 <span>Jobs Manager</span>
               </a>
-              <ul class="dropdown-menu" @if($seg1=='jobs' || $seg1=='work-orders' ) style="display: block;" @endif>
+              <ul class="dropdown-menu" @if(($seg1=='jobs' && $seg2!='receipts') || $seg1=='work-orders' ) style="display: block;" @endif>
 
                 <?php if (has_permission(67)) { ?>
                   <li class="@if($seg1=='jobs' && $seg2=='') active @endif"><a class="nav-link" href="{{route('jobs')}}">Job Queue</a></li>
@@ -282,7 +282,7 @@ $segs = [
                 <?php } ?>
 
                 <?php if (has_permission(98)) { ?>
-                  <li class="@if($seg1=='jobs' && $seg2=='receipts') active @endif">
+                  <li class="@if($seg1=='jobs' && $seg2=='receipts' && $seg3 == '') active @endif">
                     <a class="nav-link" href="{{route('create-job-receipt')}}">Add Job Receipt</a>
                   </li>
                 <?php } ?>

@@ -264,18 +264,22 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-12 text-end">
+                                <div style="justify-content: space-between!important; width: 100%;" class="d-flex justify-content-center text-center flex-row justify-content-between-important">
                                     <?php
                                     if (has_permission(80)) {
                                         if (!$row->approved) {
                                     ?>
-                                            <a href="{{route('create-job-invoice', [$row->id])}}" role="btn" class="btn btn-sm btn-primary pull-left">
-                                                Add New Invoice
-                                            </a>
+                                        <a href="{{route('create-job-invoice', [$row->id])}}" role="btn" class="btn btn-sm btn-primary pull-left p-1 pr-2 pl-2 m-3">
+                                            Add New Invoice
+                                        </a>
                                     <?php
                                         }
                                     }
                                     ?>
+                                    <a href="{{route('invoice-generate-summary-pdf', $row->id)}}" class="btn btn-sm btn-dark pull-left p-1 pr-2 pl-2 m-3" title="Generate all invoices PDF">
+                                        <i class="far fa-file-pdf mr-2"></i>
+                                        Generate Invoices PDF
+                                    </a>
                                 </div>
                                 <div class="col-md-12">
                                     <table class="table table-sm table-condensed">

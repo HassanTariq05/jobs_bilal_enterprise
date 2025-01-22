@@ -11,6 +11,9 @@ use App\Models\JobInvoiceReceiptDetail;
 use App\Models\JobInvoice;
 use App\Http\Requests\StoreJobInvoiceReceiptRequest;
 use App\Http\Requests\UpdateJobInvoiceReceiptRequest;
+use App\Models\JobInvoiceDetail;
+use App\Models\JobPerformance;
+use App\Models\Job;
 
 use Illuminate\Support\Facades\DB;
 
@@ -32,6 +35,7 @@ class JobInvoiceReceiptController extends Controller
         access_guard(252);
 
         $rows = DB::select("SELECT * from job_invoices order by id desc limit 100");
+        $jobRows = DB::select("SELECT * from jobs order by id desc limit 100");
 
 
         foreach ($rows as $row) {
@@ -45,6 +49,33 @@ class JobInvoiceReceiptController extends Controller
             ";
             $itemCounts = DB::select($itemsQuery);
 
+            $jobQuery = "
+                SELECT j.job_no, p.title AS party_title
+                FROM jobs.job_invoice_container_breakup_items AS jicbi
+                INNER JOIN jobs.job_invoice_container_breakups AS jicb
+                    ON jicb.id = jicbi.job_invoice_container_breakup_id
+                INNER JOIN jobs.job_invoices AS ji
+                    ON ji.id = jicb.job_invoice_id
+                INNER JOIN jobs.jobs AS j
+                    ON j.id = ji.job_id
+                INNER JOIN jobs.parties AS p
+                    ON p.id = j.party_id
+                WHERE jicb.job_invoice_id = $row->id;
+            ";            
+            $job = DB::select($jobQuery);
+
+            $partyQuery = "
+                SELECT job_no 
+                FROM jobs.job_invoice_container_breakup_items AS jicbi
+                INNER JOIN jobs.job_invoice_container_breakups AS jicb
+                    ON jicb.id = jicbi.job_invoice_container_breakup_id
+                INNER JOIN jobs.job_invoices AS ji
+                    ON ji.id = jicb.job_invoice_id
+                INNER JOIN jobs.jobs AS j
+                    ON j.id = ji.job_id
+                WHERE jicb.job_invoice_id = $row->id;
+            ";
+
             $receiptsQuery = "
             SELECT count(*) receipt_count FROM jobs.job_invoice_receipt_details where job_invoice_id = $row->id;
             ";
@@ -52,10 +83,68 @@ class JobInvoiceReceiptController extends Controller
 
             $row->items_count = $itemCounts[0]->item_count;
             $row->receipt_count = $receiptCounts[0]->receipt_count;
+            if (!empty($job) && isset($job[0]->job_no) && isset($job[0]->party_title)) {
+                $row->job_no = $job[0]->job_no;
+                $row->party_title = $job[0]->party_title;
+            } else {
+                $row->job_no = null;
+                $row->party_title = null;
+            }
         }
 
         return view($this->root . 'summary', compact('rows'));
     }
+
+    public function show($job_id, $job_inv_id)
+    {
+        try {
+            if (!is_numeric($job_id) || !is_numeric($job_inv_id)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid ID format.',
+                ], 400);
+            }
+
+            $job = Job::find($job_id);
+            if (!$job) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Job not found.',
+                ], 404);
+            }
+
+            $inv = JobInvoice::where('id', $job_inv_id)->first();
+            if (!$inv) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Job invoice not found.',
+                ], 404);
+            }
+
+            $rows = JobInvoiceDetail::where('job_invoice_id', $inv->id)
+                ->leftJoin('jobs.account_titles', 'jobs.account_titles.id', '=', 'job_invoice_details.account_title_id')
+                ->select(
+                    'job_invoice_details.*',
+                    'jobs.account_titles.title as account_title'
+                )
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'job' => $job,
+                    'inv' => $inv,
+                    'rows' => $rows,
+                ],
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
 
 
 
@@ -163,14 +252,6 @@ class JobInvoiceReceiptController extends Controller
             );
             return back()->with($alert);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(JobInvoiceReceipt $jobInvoiceReceipt)
-    {
-        access_guard(97);
     }
 
     /**

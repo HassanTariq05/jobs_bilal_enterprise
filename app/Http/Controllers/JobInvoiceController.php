@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\DB;
 
 use PDF;
 
+use function Laravel\Prompts\select;
+
 class JobInvoiceController extends Controller
 {
 
@@ -353,5 +355,62 @@ class JobInvoiceController extends Controller
 
         return view($this->root . 'generate_invoice_pdf_form', compact('id', 'bank_accounts', 'inv', 'submit', 'tax_invoice', 'bank_account'));
 
+    }
+
+    public function generate_invoice_summary_pdf(Request $request, $id)
+    {
+        $submit = 0;
+        $tax_invoice = 1;
+        $bank_account = [];
+        $invoices = [];
+
+        $invoices = JobInvoice::where('job_id', $id)->get();
+        $bank_accounts = BankAccount::all();
+
+        $customerQuery = 
+        "   SELECT jobs.parties.title, jobs.parties.ntn
+            FROM jobs.jobs
+            JOIN jobs.parties ON jobs.jobs.party_id = jobs.parties.id
+            WHERE jobs.jobs.id= $id;
+        ";
+        $customer = Db::select($customerQuery);
+
+        $locationQuery = 
+        "   SELECT jobs.locations.title
+            FROM jobs.locations
+            JOIN jobs.jobs ON jobs.jobs.location_id = jobs.locations.id
+            WHERE jobs.jobs.id= $id;
+        ";
+        $location = Db::select($locationQuery);
+
+        $companyNtnQuery = "
+            SELECT jobs.companies.ntn
+            FROM jobs.jobs
+            JOIN jobs.companies ON jobs.jobs.company_id = jobs.companies.id
+            WHERE jobs.jobs.id= $id;        
+        ";
+
+        $companyNtn = Db::select($companyNtnQuery);
+
+        if (isset($request->submit)) {
+            $tax_invoice = $request->tax_invoice;
+            $submit = 1;
+
+            $bank_account = BankAccount::find($request->bank_account_id);
+
+            $pdf = PDF::loadView(
+                $this->root . 'generate_invoice_summary_pdf',
+                compact('id', 'customer', 'location', 'companyNtn', 'bank_accounts', 'invoices', 'submit', 'tax_invoice', 'bank_account')
+            )->setPaper('A4', 'portrait');
+
+            return $pdf->download("invoices_summary_job_$id.pdf");
+        }
+
+        
+
+        return view(
+            $this->root . 'generate_invoice_summary_pdf_form',
+            compact('id', 'customer', 'bank_accounts', 'invoices', 'submit', 'tax_invoice', 'bank_account')
+        );
     }
 }
