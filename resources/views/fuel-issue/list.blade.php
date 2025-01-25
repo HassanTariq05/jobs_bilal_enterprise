@@ -36,7 +36,7 @@
                                 <tr>
                                     <td class="text-center">{{$loop->iteration}}</td>
                                     <td>{{$row->tank->title ?? ''}}</td>
-                                    <td>{{$row->fleet->engine_number ?? ''}}</td>
+                                    <td>{{$row->fleet->registration_number ?? ''}}</td>
                                     <td>{{$row->operation->title ?? ''}}</td>
                                     <td>{{$row->driver}}</td>
                                     <td>{{$row->fill_date}}</td>

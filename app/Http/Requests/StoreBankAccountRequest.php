@@ -25,7 +25,7 @@ class StoreBankAccountRequest extends FormRequest
         return [
             'bank' => 'required',
             'address' => 'required',
-            'title' => 'required|unique:bank_accounts',
+            'title' => 'required',
             'iban' => 'required|unique:bank_accounts',            
             'company_id' => 'required',
         ];

@@ -85,39 +85,34 @@ class ContainerSizeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    /*
-     public function edit(Location $location, $id)
+
+    public function edit(Request $reques, $id)
     {
-        access_guard(157);
-        $row = Location::find($id);
+        access_guard(21);
+        $row = ContainerSize::find($id);
         if (!$row) {
-            return redirect()->route('locations');
+            return redirect()->route('container-sizes');
         }
         return view($this->root . 'edit', compact('row'));
     }
-        */
 
     /**
      * Update the specified resource in storage.
      */
-    /*
-     public function update(UpdateLocationRequest $request, Location $location, $id)
+
+     public function update(Request $request, $id)
     {
         access_guard(157);
         $data = [
-            'short_name' => $request->short_name,
-            'title' => $request->title,
-            'slug' => Str::slug($request->title),
-            'address' => $request->address,
+            'container_size' => $request->container_size,
         ];
-        Location::where('id', $id)->update($data);
+        ContainerSize::where('id', $id)->update($data);
         $alert = array(
             'message' => 'Updated successfully',
             'alert-type' => 'success'
         );
         return back()->with($alert);
     }
-        */
 
     /**
      * Trash the specified resource from storage.

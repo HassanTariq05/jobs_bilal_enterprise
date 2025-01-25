@@ -25,7 +25,7 @@
         <option value="">--select--</option>
         @if($rows)
         @foreach($rows as $row)
-        <option @if(isset($selected) && $selected==$row->id) selected @endif value="{{$row->id}}">{{$row->engine_number}}</option>
+        <option @if(isset($selected) && $selected==$row->id) selected @endif value="{{$row->id}}">{{$row->registration_number}}</option>
         @endforeach
         @endif
     </select>
