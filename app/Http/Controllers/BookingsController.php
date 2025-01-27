@@ -159,17 +159,42 @@ class BookingsController extends Controller
                     bc.off_loading_port, 
                     bc.container_weight, 
                     bc.cross_stuffing_status, 
-                    bc.detention_start_date
+                    bc.detention_start_date,
+                    bc.vehicle_no
                 FROM booking_containers AS bc
                 WHERE bc.booking = :id
             ";
 
             $containers = DB::select($containerQuery, ['id' => $id]);
 
+            $processedContainers = [];
+            foreach ($containers as $index => $container) {
+                $vehicleExists = DB::table('fleets')
+                    ->where('registration_number', $container->vehicle_no)
+                    ->exists();
+
+                $processedContainers[] = [
+                    'index' => $index + 1,
+                    'container_no' => $container->container_no ?? '',
+                    'size' => $container->size ?? '',
+                    'status' => $container->status ?? '',
+                    'date' => $container->date ?? '',
+                    'loading_port' => $container->loading_port ?? '',
+                    'off_loading_port' => $container->off_loading_port ?? '',
+                    'container_weight' => $container->container_weight ?? '',
+                    'cross_stuffing_status' => isset($container->cross_stuffing_status) 
+                        ? strtoupper($container->cross_stuffing_status) 
+                        : '',
+                    'detention_start_date' => $container->detention_start_date ?? '',
+                    'vehicle_no' => $container->vehicle_no ?? '',
+                    'vehicle_type' => $vehicleExists ? 'Owned' : 'Private',
+                ];
+            }
+
             return response()->json([
                 'success' => true,
                 'data' => [
-                    'containers' => $containers,
+                    'containers' => $processedContainers,
                 ],
             ]);
         } catch (\Exception $e) {

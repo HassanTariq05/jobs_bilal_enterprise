@@ -96,6 +96,8 @@
                   <th>Weight</th>
                   <th>Cross Stuffing Status</th>
                   <th>Detention Start Date</th>
+                  <th>Vehicle Number</th>
+                  <th>Vehicle Type</th>
                 </tr>
               </thead>
               <tbody id="containers_table_body">
@@ -122,7 +124,7 @@
         $("#booking_number").text(id ? id : "N/A");
 
         $("#containers_table_body").html(
-        '<tr><td colspan="10" class="text-center">Loading...</td></tr>'
+        '<tr><td colspan="12" class="text-center">Loading...</td></tr>'
         );
 
         const url = `<?= url("/bookings/summary/show") ?>/${id}`;
@@ -132,40 +134,44 @@
         type: "GET",
         contentType: "json",
         success: function (response) {
-          let rows = "";
+            let rows = "";
+            console.log(response.data.containers);
 
-          if (response.data && response.data.containers.length > 0) {
-          response.data.containers.forEach((container, index) => {
-              rows += `
-              <tr>
-                  <td>${index + 1}</td>
-                  <td>${container.container_no || ""}</td>
-                  <td>${container.size || ""}</td>
-                  <td>${container.status || ""}</td>
-                  <td>${container.date || ""}</td>
-                  <td>${container.loading_port || ""}</td>
-                  <td>${container.off_loading_port || ""}</td>
-                  <td>${container.container_weight || ""}</td>
-                  <td>${container.cross_stuffing_status ? container.cross_stuffing_status.toUpperCase() : ""}</td>
-                  <td>${container.detention_start_date || ""}</td>
-              </tr>`;
-          });
-          $("#containers-modal-footer").show();
-          } else {
-          rows = '<tr><td colspan="10" class="text-center">No containers found</td></tr>';
-          $("#containers-modal-footer").hide();
-          }
+            if (response.data && response.data.containers.length > 0) {
+                response.data.containers.forEach(container => {
+                    rows += `
+                    <tr>
+                        <td>${container.index}</td>
+                        <td>${container.container_no}</td>
+                        <td>${container.size}</td>
+                        <td>${container.status}</td>
+                        <td>${container.date}</td>
+                        <td>${container.loading_port}</td>
+                        <td>${container.off_loading_port}</td>
+                        <td>${container.container_weight}</td>
+                        <td>${container.cross_stuffing_status}</td>
+                        <td>${container.detention_start_date}</td>
+                        <td>${container.vehicle_no}</td>
+                        <td>${container.vehicle_type}</td>
+                    </tr>`;
+                });
+                $("#containers-modal-footer").show();
+            } else {
+                rows = '<tr><td colspan="12" class="text-center">No containers found</td></tr>';
+                $("#containers-modal-footer").hide();
+            }
 
-          $("#containers_table_body").html(rows);
+            $("#containers_table_body").html(rows);
         },
         error: function () {
-          console.error("Failed to fetch container data");
-          $("#containers_table_body").html(
-          '<tr><td colspan="10" class="text-center text-danger">Error loading data</td></tr>'
-          );
+            console.error("Failed to fetch container data");
+            $("#containers_table_body").html(
+                '<tr><td colspan="10" class="text-center text-danger">Error loading data</td></tr>'
+            );
         },
-      });
     });
+  });
+
     $("#tableSearch").on("input", function () {
         const value = $(this).val().toLowerCase();
         $("#containers_table_body tr").filter(function () {
