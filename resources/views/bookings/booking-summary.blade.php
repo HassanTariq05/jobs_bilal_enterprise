@@ -135,7 +135,6 @@
         contentType: "json",
         success: function (response) {
             let rows = "";
-            console.log(response.data.containers);
 
             if (response.data && response.data.containers.length > 0) {
                 response.data.containers.forEach(container => {
