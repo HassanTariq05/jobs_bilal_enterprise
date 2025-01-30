@@ -299,26 +299,36 @@ class JobPerformanceController extends Controller
         } 
     }
 
-    public function updateContainers($jobId, $bookingNumber) {
-
+    public function updateContainers($jobId, $bookingNumber)
+    {
         $request = request();
 
-        for($i=0; $i<count($request->container_ids); $i++) {
-            BookingContainers
-            ::where("id", $request->container_ids[$i])
-            ->update(
-                [
-                    "vehicle_no"=>$request->vehicle_number[$i],
-                    "cross_stuffing_container_no"=>$request->cross_stuffing_container_no[$i],
-                    "activity_status"=>"CLOSED"
-                ]
-            );
+        // Ensure that $bookingNumber is properly formatted
+        $bookingNumInt = (int) $bookingNumber; // This may not be needed if booking number is a string
+
+        // Validate that vehicle_type exists and is an array
+        if (!isset($request->vehicle_type) || !is_array($request->vehicle_type)) {
+            return back()->with([
+                'message' => "No vehicle types provided.",
+                'alert-type' => 'error'
+            ]);
         }
 
-        $alert = array(
-            'message' => "Updated ".count($request->container_ids)." containers.",
+        for ($i = 0; $i < count($request->vehicle_type); $i++) {
+            BookingContainers::where("booking", $bookingNumber) // Use $bookingNumber directly
+                ->update([
+                    "vehicle_no" => $request->vehicle_number[$i] ?? null,
+                    "cross_stuffing_container_no" => $request->cross_stuffing_container_no[$i] ?? null,
+                    "activity_status" => "CLOSED"
+                ]);
+        }
+
+        $alert = [
+            'message' => "Updated " . count($request->vehicle_type) . " containers.",
             'alert-type' => 'success'
-        );
-        return back()->with($alert); 
+        ];
+
+        return back()->with($alert);
     }
+
 }

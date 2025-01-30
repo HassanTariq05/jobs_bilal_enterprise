@@ -160,7 +160,8 @@ class BookingsController extends Controller
                     bc.container_weight, 
                     bc.cross_stuffing_status, 
                     bc.detention_start_date,
-                    bc.vehicle_no
+                    bc.vehicle_no,
+                    bc.open_cargo_status
                 FROM booking_containers AS bc
                 WHERE bc.booking = :id
             ";
@@ -188,6 +189,7 @@ class BookingsController extends Controller
                     'detention_start_date' => $container->detention_start_date ?? '',
                     'vehicle_no' => $container->vehicle_no ?? '',
                     'vehicle_type' => $vehicleExists ? 'Owned' : 'Private',
+                    'open_cargo_status' => $container->open_cargo_status == 'yes' ? 'YES' : 'NO'
                 ];
             }
 
@@ -311,8 +313,8 @@ class BookingsController extends Controller
 
     $file = DB::select("SELECT book_f.* FROM booking_files as book_f JOIN bookings as book on book_f.booking_id = book.bl_no where book.id = {$id};");
 
-
         return view($this->root . 'edit', compact('row', 'file', 'location', 'parties', 'container_sizes', 'containers'));
+
         //echo json_encode([$file]);
      //   echo $location;
      //   echo $parties;
@@ -483,6 +485,7 @@ class BookingsController extends Controller
 
     public function store_manually(Request $request) {
 
+
         $booking = rand(1000000, 99999);
 
         $bl_no = $this->getNextBLNo();
@@ -490,9 +493,9 @@ class BookingsController extends Controller
         access_guard(253);
         DB::beginTransaction();
         // $booking_no = $request->booking;
-        $container_no = $request['container_no-array'];
+        $container_no = $request->input('container_no-array', []); 
+        $isOpenCargoChecked = $request->input('open_cargo-array', []);
         $container_size = $request['container_size-array'];
-       
         $container_status = $request['container_status-array'];
         $date_array = $request['container_date-array'];
         $container_offload = $request['off_load-array'];
@@ -501,6 +504,8 @@ class BookingsController extends Controller
         $cross_stuffing_status = $request['cross_stuffing_status-array'];
         $detention_date = $request['detention_date-array'];
         // dd($date_array[0]);
+
+        
          
         $data = [
             'booking' => $booking,
@@ -540,6 +545,11 @@ class BookingsController extends Controller
         
        DB::beginTransaction();
        for ($i = 0; $i < count($container_no); $i++) {
+            if (empty($container_no[$i])) {
+                $openCargoStatus = "yes";
+            } else {
+                $openCargoStatus = "no";
+            }
             $manual_data = [
                 'booking' => $booking,
                 'bl_no' => $bl_no,
@@ -556,10 +566,9 @@ class BookingsController extends Controller
                 'container_weight' => $weight[$i],
                 'cross_stuffing_status' => $cross_stuffing_status[$i],
                 'detention_start_date' => $detention_date[$i],
-
+                'open_cargo_status' => $openCargoStatus
 
             ];
-            //dd($manual_data);
         
             // now booking_containers table
             try {
@@ -594,6 +603,7 @@ class BookingsController extends Controller
         access_guard(253);
         
         $container_no = $request['container_no-array'];
+        $open_cargo = $request['open_cargo_status'];
         $container_size = $request['container_size-array'];
        
         $container_status = $request['container_status-array'];
@@ -609,6 +619,11 @@ class BookingsController extends Controller
        $oldContainers = BookingContainers::where(["bl_no"=>$bl_no])->delete();
 
        for ($i = 0; $i < count($container_no); $i++) {
+            if (empty($container_no[$i])) {
+                $openCargoStatus = "yes";
+            } else {
+                $openCargoStatus = "no";
+            }
             $manual_data = [
                 'booking' => $booking,
                 'bl_no' => $bl_no,
@@ -625,6 +640,7 @@ class BookingsController extends Controller
                 'container_weight' => $weight[$i],
                 'cross_stuffing_status' => $cross_stuffing_status[$i],
                 'detention_start_date' => $detention_date[$i],
+                'open_cargo_status' => $openCargoStatus
             ];
             
             try {

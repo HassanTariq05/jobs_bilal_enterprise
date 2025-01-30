@@ -70,6 +70,7 @@
                                             <!-- <th class="text-center">Action</th> -->
                                             <th>Bill of Ladding no.</th>
                                             <th>Container no.</th>
+                                            <th>Open Cargo</th>
                                             <th>Size</th>
                                             <th>Status</th>
                                             <th>Vehicle no.</th>
@@ -90,6 +91,7 @@
                                             </td> -->
                                             <td>{{ $r->bl_no }}</td>
                                             <td>{{ $r->container_no }}</td>
+                                            <td>{{ $r->container_no ? "YES" : "NO" }}</td>
                                             <td>{{ $r->size }}</td>
                                             <td>{{ $r->status }}</td>
                                             <td>{{ $r->vehicle_no }}</td>

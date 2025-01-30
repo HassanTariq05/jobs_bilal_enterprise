@@ -273,6 +273,7 @@
                                                     </th>
                                                     <th style="min-width:100px;">Bill of Ladding no.</th>
                                                     <th style="min-width:100px;">Container no.</th>
+                                                    <th style="min-width:100px;">Open Cargo</th>
                                                     <th style="min-width:50px;">Size</th>
                                                     <th style="min-width:80px;">Status</th>
                                                     <th style="min-width:100px;">Vehicle no.</th>
@@ -304,6 +305,7 @@
                                                         </td>
                                                         <td>{{ $r->bl_no }}</td>
                                                         <td>{{ $r->container_no }}</td>
+                                                        <td>{{ $r->container_no ? "YES" : "NO" }}</td>
                                                         <td>{{ $r->size }}</td>
                                                         <td>{{ $r->status }}</td>
                                                         <td>{{ $r->vehicle_no }}</td>

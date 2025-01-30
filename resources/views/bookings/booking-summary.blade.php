@@ -88,6 +88,7 @@
                 <tr>
                   <th>#</th>
                   <th>Container</th>
+                  <th>Open Cargo</th>
                   <th>Size</th>
                   <th>Status</th>
                   <th>Date</th>
@@ -142,6 +143,7 @@
                     <tr>
                         <td>${container.index}</td>
                         <td>${container.container_no}</td>
+                        <td>${container.open_cargo_status}</td>
                         <td>${container.size}</td>
                         <td>${container.status}</td>
                         <td>${container.date}</td>

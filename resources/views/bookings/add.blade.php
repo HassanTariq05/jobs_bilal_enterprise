@@ -135,6 +135,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>Containers</th>
+                                                                    <th>Open Cargo</th>
                                                                     <th>SIZE</th>
                                                                     <th>STATUS</th>
                                                                     <th>DATE</th>
@@ -151,7 +152,13 @@
 
                                                                     <td>
                                                                         <div>
-                                                                            <input type="text" id="container_no_input_0" name="container_no-array[]" oninput="validateContainer(this)" style="margin-left: 5px; width:150px; height: 40px;">
+                                                                            <input type="text" id="container_no_input_0" name="container_no-array[]" style="margin-left: 5px; width:150px; height: 40px;">
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td class="d-flex justify-content-center">
+                                                                        <div class="form-check">
+                                                                            <input value="" class="form-check-input" type="checkbox"  id="flexCheckDefault" name="open_cargo-array[]">
                                                                         </div>
                                                                     </td>
 
@@ -330,12 +337,34 @@
             </div>
         </div>
     <?php }  ?>
-
-
     <!-- Bootstrap JS (make sure it's included) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
 
     <script>
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            // Select all open cargo checkboxes
+            document.querySelectorAll('input[name="open_cargo-array[]"]').forEach((checkbox, index) => {
+                checkbox.addEventListener("change", function () {
+                const containerInput = document.querySelectorAll('input[name="container_no-array[]"]')[index];
+                const hiddenContainerInput = document.querySelectorAll('input[name="hidden_container_no-array[]"]')[index];  // Hidden input for container_no
+
+                if (this.checked) {
+                    containerInput.value = "";  // Clear container number input when checked
+                    containerInput.readOnly = true;  // Make the container input read-only
+                    containerInput.classList.remove("required");  // Remove required class
+
+                    hiddenContainerInput.value = null;  // Set hidden input value to null when checked
+                } else {
+                    containerInput.readOnly = false;  // Make the container input editable
+                    containerInput.classList.add("required");  // Add required class back
+
+                    hiddenContainerInput.value = containerInput.value;  // Sync the hidden input value with the container input value
+                }
+            });
+
+        }); 
+        });
 
         function validateAllFields() {
             const manualTab = document.getElementById('nav-manual-entry-tab');
@@ -346,6 +375,7 @@
 
             let isValid = true;
             const containerInputs = document.querySelectorAll('input[name="container_no-array[]"]');
+            const openCargoCheck = document.querySelectorAll('input[name="open_cargo-array[]"]')
             const statusSelects = document.querySelectorAll('select[name="container_status-array[]"]');
             const loadingPortSelects = document.querySelectorAll('select[name="loading_port-array[]"]');
             const offLoadSelects = document.querySelectorAll('select[name="off_load-array[]"]');
@@ -354,7 +384,7 @@
             const errorElement = document.getElementById("validation_line");
 
             errorElement.style.display = 'none';
-            const containerRecords = {}; // To keep track of container numbers and their statuses
+            const containerRecords = {};
 
             containerInputs.forEach((containerInput, index) => {
                 const containerNo = containerInput.value;
@@ -365,22 +395,21 @@
                 const detentionDate = detentionDateInputs[index].value;
 
                 // Check for empty fields
-                if (!containerNo || !status || !loadingPort || !offLoad || !weight || !detentionDate) {
-                    errorElement.textContent = 'All fields are required.';
-                    errorElement.style.display = 'inline';
-                    isValid = false;
-                    return; // Stop further validation if any field is missing
+                if(!containerInput.readOnly) {
+                    if (!containerNo || !status || !loadingPort || !offLoad || !weight || !detentionDate) {
+                        errorElement.textContent = 'All fields are required.';
+                        errorElement.style.display = 'inline';
+                        isValid = false;
+                        return; // Stop further validation if any field is missing
+                    }
+                    const regex = /^[A-Za-z]{4}[0-9]{7}$/;
+                    if (!regex.test(containerNo)) {
+                        errorElement.textContent = 'Container ID must be 4 letters followed by 7 numbers with no spaces.';
+                        errorElement.style.display = 'inline';
+                        isValid = false;
+                        return; // Stop further validation for this input
+                    }
                 }
-
-                // Regex validation for container number format
-                const regex = /^[A-Za-z]{4}[0-9]{7}$/;
-                if (!regex.test(containerNo)) {
-                    errorElement.textContent = 'Container ID must be 4 letters followed by 7 numbers with no spaces.';
-                    errorElement.style.display = 'inline';
-                    isValid = false;
-                    return; // Stop further validation for this input
-                }
-
                 // Track container numbers and their statuses
                 if (containerRecords[containerNo]) {
                     containerRecords[containerNo].push(status);
@@ -414,18 +443,26 @@
 
         var container_count = 1;
         document.getElementById('add_container_button').addEventListener('click', function(event) {
-            event.preventDefault();
+        event.preventDefault();
 
-            var tableBody = document.getElementById('containers_table');
-            var row = document.createElement('tr');
-            row.setAttribute('id', 'container_row_'+container_count)
-            row.innerHTML = 
-            `<td>
+        var tableBody = document.getElementById('containers_table');
+        var row = document.createElement('tr');
+        row.setAttribute('id', 'container_row_' + container_count);
+        
+        row.innerHTML = `
+            <td>
                 <div>
-                    <input type="text" id="container_no_input_${container_count}" oninput="validateContainer(this)" name="container_no-array[]" style="margin-left: 5px; width:150px; height: 40px;">
+                    <input type="text" value="" id="container_no_input_${container_count}" name="container_no-array[]"  style="margin-left: 5px; width:150px; height: 40px;">
                     <span class="container_error" style="color: #f00; display: none;"></span>
                 </div>
             </td>
+
+            <td>
+                <div class="form-check">
+                    <input class="form-check-input open_cargo_checkbox" type="checkbox" id="flexCheckDefault_${container_count}" name="open_cargo-array[]">
+                </div>
+            </td>
+
             <td>
                 <select class="form-control _select2" name="container_size-array[]" style="width:100px;">
                     <option value="">--select--</option>
@@ -480,16 +517,32 @@
             </td>
             <td><input type="date" name="detention_date-array[]" style="margin-left: 10px;  width:150px; height: 40px;"></td>
             <td>
-                <div class="delete_manual_container" data=`+(container_count)+` onclick="if(confirm('Are you sure you want to delete this?')) deleteRow(`+container_count+`)" >
+                <div class="delete_manual_container" data="${container_count}" onclick="if(confirm('Are you sure you want to delete this?')) deleteRow(${container_count})">
                     <i class="fas fa-trash"></i>
                 </div>
             </td>`;
 
             tableBody.appendChild(row);
+
+            var checkbox = row.querySelector('.open_cargo_checkbox');
+            var containerInput = row.querySelector(`#container_no_input_${container_count}`);
+
+            if (checkbox && containerInput) {  // Ensure both elements are found
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        containerInput.value = '';
+                        containerInput.readOnly = true;  // Set to read-only if checkbox is checked
+                    } else {
+                        containerInput.readOnly = false;  // Set to editable if checkbox is unchecked
+                    }
+                });
+            }
+
+
             container_count += 1;
         });
 
-        // Toggle form action based on tab selection
+
         document.getElementById('nav-manual-entry-tab').addEventListener('click', function() {
             const form = document.getElementById('myForm');
             form.setAttribute('action', '{{route("store-booking-manually")}}');
@@ -504,7 +557,6 @@
             var row = document.getElementById('container_row_'+counter);
             row.parentNode.removeChild(row);
         }
-
     </script>
 
 </x-layout-admin>

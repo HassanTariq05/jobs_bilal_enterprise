@@ -142,7 +142,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="update_containers" method="post" action="{{route('update-containers', ["--", "--"], )}}" enctype="multipart/form-data">
+      <form id="update_containers" method="post" action="{{ route('update-containers', ['--', $row->booking]) }}" enctype="multipart/form-data">
         @csrf
         <div class="modal-body">
             <div class="card-body p-0">
@@ -151,6 +151,7 @@
                         <thead>
                             <tr>
                                 <th>Container</th>
+                                <th>Open Cargo</th>
                                 <th>Size</th>
                                 <th>Status</th>
                                 <th>Date</th>
@@ -181,6 +182,20 @@
 </div>
 
 <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    let form = document.getElementById("update_containers");
+    let newParam = "your_new_value"; // Replace this with the actual value you want
+
+    // Get current action URL
+    let actionUrl = form.action;
+
+    // Replace the last segment with the newParam
+    let urlParts = actionUrl.split("/");
+    urlParts[urlParts.length - 1] = encodeURIComponent(newParam); // Replace last parameter
+    form.action = urlParts.join("/");
+});
+
 
 fleet = <?= json_encode($fleet) ?>
 
@@ -230,7 +245,9 @@ $(".view-details").on('click', function(event){
 
                 str += "<tr>"
                 c = json.data.containers[i]
-                str += "<td>"+c.container_no+'<input type="hidden" name="container_ids[]" value="'+ c.id +'"/></td>'
+
+                str += c.container_no ? "<td>"+c.container_no+'<input type="hidden" name="container_ids[]" value="'+ c.id +'"/></td>': "<td></td>"
+                str += "<td>"+ c.open_cargo_status.toUpperCase()+"</td>"
                 str += "<td>"+c.size+"</td>"
                 str += "<td>"+c.status+"</td>"
                 str += "<td>"+c.date+"</td>"

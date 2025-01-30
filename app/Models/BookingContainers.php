@@ -24,7 +24,7 @@ class BookingContainers extends Model
         'container_weight',
         'cross_stuffing_status',
         'detention_start_date',
-    
+        'open_cargo_status',
     ];
     
 }

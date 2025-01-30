@@ -161,6 +161,7 @@
                                     <thead>
                                         <tr>
                                             <th>Container#</th>
+                                            <th>Open Cargo</th>
                                             <th>SIZE</th>
                                             <th>STATUS</th>
                                             <th>DATE</th>
@@ -178,7 +179,7 @@
                                         @foreach($containers as $container)
                                         <tr id="container_row_{{$i}}">
                                             <td>
-                                                <div>
+                                              <div>
                                                     <input 
                                                         type="text" 
                                                         id="container_no_input_0" 
@@ -190,7 +191,18 @@
                                                     >
                                                 </div>
                                             </td>
-
+                                            <td class="d-flex justify-content-center">
+                                                <div class="form-check">
+                                                    <input 
+                                                        class="form-check-input" 
+                                                        type="checkbox" 
+                                                        name="open_cargo-array[]"
+                                                        value="yes"
+                                                        id="open_cargo_status_{{ $loop->index }}" 
+                                                        @if(isset($container->open_cargo_status) && $container->open_cargo_status == 'yes') checked @endif
+                                                    >
+                                                </div>
+                                            </td>
                                             <td>
                                                 <!--     Replace row with the container sizes -->
                                                 <select class="form-control _select2" name="container_size-array[]" style="width:100px;">
@@ -310,6 +322,28 @@
 </x-layout-admin>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    // Select all open cargo checkboxes
+    document.querySelectorAll('input[name="open_cargo-array[]"]').forEach((checkbox, index) => {
+        const containerInput = document.querySelectorAll('input[name="container_no-array[]"]')[index];
+
+        if (checkbox.checked) {
+            containerInput.value = "";  // Clear container number input when checked
+            containerInput.readOnly = true;  // Make it read-only
+        }
+
+        // Add event listener for changes
+        checkbox.addEventListener("change", function () {
+            if (this.checked) {
+                containerInput.value = "";  // Clear input if checked
+                containerInput.readOnly = true;
+            } else {
+                containerInput.readOnly = false;
+            }
+        });
+    });
+});
+
 
     var container_count = {{count($containers)}};
     document.getElementById('add_container_button').addEventListener('click', function(event) {
@@ -323,6 +357,17 @@
             <div>
                 <input type="text" id="container_no_input_${container_count}" oninput="validateContainer(this)" name="container_no-array[]" style="margin-left: 5px; width:150px; height: 40px;" pattern="^[A-Za-z]{4}[0-9]{7}$">
                 <span class="container_error" style="color: #f00; display: none;"></span>
+            </div>
+        </td>
+        <td>
+            <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="flexCheckDefault_${container_count}" 
+                    name="open_cargo-array[]"
+                    data-status="no"
+                >
             </div>
         </td>
         <td>
@@ -385,8 +430,23 @@
         </td>`;
 
         tableBody.appendChild(row);
+        var checkbox = row.querySelector(`#flexCheckDefault_${container_count}`);
+        var containerInput = row.querySelector(`#container_no_input_${container_count}`);
+
+        if (checkbox && containerInput) {  // Ensure both elements are found
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        containerInput.value = '';
+                        containerInput.readOnly = true;  // Set to read-only if checkbox is checked
+                    } else {
+                        containerInput.readOnly = false;  // Set to editable if checkbox is unchecked
+                    }
+                });
+            }
         container_count += 1;
     });
+
+    
 
     function deleteRow(counter) {
         var row = document.getElementById('container_row_'+counter);
