@@ -221,7 +221,6 @@
                                                                         <!-- Show status  -->
                                                                         <select class="form-control _select2" name="cross_stuffing_status-array[]" style="width:100px;">
                                                                             <option value="">--select--</option>
-
                                                                             <option value="yes">YES</option>
                                                                             <option value="no">NO</option>
                                                                         </select>
@@ -375,11 +374,14 @@
 
             let isValid = true;
             const containerInputs = document.querySelectorAll('input[name="container_no-array[]"]');
+            const sizeSelects = document.querySelectorAll('select[name="container_size-array[]"]');
             const openCargoCheck = document.querySelectorAll('input[name="open_cargo-array[]"]')
             const statusSelects = document.querySelectorAll('select[name="container_status-array[]"]');
+            const dateInputs = document.querySelectorAll('input[name="container_date-array[]"]');
             const loadingPortSelects = document.querySelectorAll('select[name="loading_port-array[]"]');
             const offLoadSelects = document.querySelectorAll('select[name="off_load-array[]"]');
             const weightInputs = document.querySelectorAll('input[name="weight-array[]"]');
+            const crossStuffingSelects = document.querySelectorAll('select[name="cross_stuffing_status-array[]"]')
             const detentionDateInputs = document.querySelectorAll('input[name="detention_date-array[]"]');
             const errorElement = document.getElementById("validation_line");
 
@@ -388,15 +390,18 @@
 
             containerInputs.forEach((containerInput, index) => {
                 const containerNo = containerInput.value;
+                const size = sizeSelects[index].value;
                 const status = statusSelects[index].value;
+                const date = dateInputs[index].value;
                 const loadingPort = loadingPortSelects[index].value;
                 const offLoad = offLoadSelects[index].value;
                 const weight = weightInputs[index].value;
+                const crossStuffing = crossStuffingSelects[index].value;
                 const detentionDate = detentionDateInputs[index].value;
 
                 // Check for empty fields
                 if(!containerInput.readOnly) {
-                    if (!containerNo || !status || !loadingPort || !offLoad || !weight || !detentionDate) {
+                    if(!containerNo) {
                         errorElement.textContent = 'All fields are required.';
                         errorElement.style.display = 'inline';
                         isValid = false;
@@ -416,6 +421,13 @@
                 } else {
                     containerRecords[containerNo] = [status];
                 }
+
+                if (!size || !status || !date || !loadingPort || !offLoad || !weight ||  !crossStuffing || !detentionDate ) {
+                    errorElement.textContent = 'All fields are required.';
+                    errorElement.style.display = 'inline';
+                    isValid = false;
+                    return; // Stop further validation if any field is missing
+                }    
 
                 // Validate container records
                 const statusArray = containerRecords[containerNo];

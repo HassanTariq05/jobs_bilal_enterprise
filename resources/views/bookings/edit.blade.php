@@ -299,7 +299,7 @@
                                 <div class="row">
                                     <div class="col-12 text-right">
                                         <?php if (has_permission(253)) { ?>
-                                            <button id="submit_button" class="btn btn-primary" type="submit">Save Containers</button>
+                                            <button id="submit_button" class="btn btn-primary" onclick="validateAllFields()" type="button">Submit</button>
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -445,6 +445,88 @@
             }
         container_count += 1;
     });
+
+    function validateAllFields() {
+
+            let isValid = true;
+            const containerInputs = document.querySelectorAll('input[name="container_no-array[]"]');
+            const sizeSelects = document.querySelectorAll('select[name="container_size-array[]"]');
+            const openCargoCheck = document.querySelectorAll('input[name="open_cargo-array[]"]')
+            const statusSelects = document.querySelectorAll('select[name="container_status-array[]"]');
+            const dateInputs = document.querySelectorAll('input[name="container_date-array[]"]');
+            const loadingPortSelects = document.querySelectorAll('select[name="loading_port-array[]"]');
+            const offLoadSelects = document.querySelectorAll('select[name="off_load-array[]"]');
+            const weightInputs = document.querySelectorAll('input[name="weight-array[]"]');
+            const crossStuffingSelects = document.querySelectorAll('select[name="cross_stuffing_status-array[]"]')
+            const detentionDateInputs = document.querySelectorAll('input[name="detention_date-array[]"]');
+            const errorElement = document.getElementById("validation_line");
+
+            errorElement.style.display = 'none';
+            const containerRecords = {};
+
+            containerInputs.forEach((containerInput, index) => {
+                const containerNo = containerInput.value;
+                const size = sizeSelects[index].value;
+                const status = statusSelects[index].value;
+                const date = dateInputs[index].value;
+                const loadingPort = loadingPortSelects[index].value;
+                const offLoad = offLoadSelects[index].value;
+                const weight = weightInputs[index].value;
+                const crossStuffing = crossStuffingSelects[index].value;
+                const detentionDate = detentionDateInputs[index].value;
+
+                // Check for empty fields
+                if(!containerInput.readOnly) {
+                    if(!containerNo) {
+                        errorElement.textContent = 'All fields are required.';
+                        errorElement.style.display = 'inline';
+                        isValid = false;
+                        return; // Stop further validation if any field is missing
+                    }
+                    const regex = /^[A-Za-z]{4}[0-9]{7}$/;
+                    if (!regex.test(containerNo)) {
+                        errorElement.textContent = 'Container ID must be 4 letters followed by 7 numbers with no spaces.';
+                        errorElement.style.display = 'inline';
+                        isValid = false;
+                        return; // Stop further validation for this input
+                    }
+                }
+                // Track container numbers and their statuses
+                if (containerRecords[containerNo]) {
+                    containerRecords[containerNo].push(status);
+                } else {
+                    containerRecords[containerNo] = [status];
+                }
+
+                if (!size || !status || !date || !loadingPort || !offLoad || !weight ||  !crossStuffing || !detentionDate ) {
+                    errorElement.textContent = 'All fields are required.';
+                    errorElement.style.display = 'inline';
+                    isValid = false;
+                    return; // Stop further validation if any field is missing
+                }    
+
+                // Validate container records
+                const statusArray = containerRecords[containerNo];
+                if (statusArray.length > 2) {
+                    errorElement.textContent = 'A maximum of two containers with the same ID is allowed.';
+                    errorElement.style.display = 'inline';
+                    isValid = false;
+                    return;
+                }
+
+                if (statusArray.length === 2 && statusArray[0] === statusArray[1]) {
+                    errorElement.textContent = 'Container IDs should be unique.';
+                    errorElement.style.display = 'inline';
+                    isValid = false;
+                    return;
+                }
+            });
+
+            if (isValid) {
+                document.getElementById("submit_button").type = "submit";
+                document.querySelector('form').submit();
+            }
+        }
 
     
 
