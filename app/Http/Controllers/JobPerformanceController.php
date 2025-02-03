@@ -315,13 +315,22 @@ class JobPerformanceController extends Controller
         }
 
         for ($i = 0; $i < count($request->vehicle_type); $i++) {
-            BookingContainers::where("booking", $bookingNumber) // Use $bookingNumber directly
+            // Ensure container ID is available
+            if (!isset($request->container_ids[$i])) {
+                continue;
+            }
+        
+            $containerId = $request->container_ids[$i];
+        
+            BookingContainers::where("booking", $bookingNumber) // Match the booking
+                ->where("id", $containerId) // Match the specific container
                 ->update([
                     "vehicle_no" => $request->vehicle_number[$i] ?? null,
                     "cross_stuffing_container_no" => $request->cross_stuffing_container_no[$i] ?? null,
                     "activity_status" => "CLOSED"
                 ]);
-        }
+        }        
+        
 
         $alert = [
             'message' => "Updated " . count($request->vehicle_type) . " containers.",

@@ -162,7 +162,7 @@
                                 <th>Detentation Start Date</th>
                                 <th>Cross Stuffing Container No.</th>
                                 <th>Vehicle Type</th>
-                                <th>Vehicle Number</th>
+                                <th style="min-width: 200px" >Vehicle Number</th>
                             </tr>
                         </thead>
                         <tbody id="containers_table_body">
@@ -180,6 +180,13 @@
     </div>
   </div>
 </div>
+
+<!-- Include Choices.js CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+
+<!-- Include Choices.js JS -->
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
 
 <script>
 
@@ -210,99 +217,98 @@ $(".btn-primary").click(function() {
     }, 1000)
 });
 
-$('#containers_table_body').on('change', '.vehicle_type', function() {
-    id = $(this).attr("data-id")
-    if(this.value == "owned") {
-        fleetStr = '<select name="vehicle_number[]" class="vehicle_number form-control" data-id="'+ id +'" required>'
-        fleetStr += '<option value="">Select</option>'
-        for(i=0; i<fleet.length; i++) {
-            fleetStr += '<option value="'+fleet[i].registration_number+'">Reg# '+fleet[i].registration_number+'</option>'
-        }
-        fleetStr += '</select>'
-        $("#vehicle_number_"+id).html(fleetStr)
+$('#containers_table_body').on('change', '.vehicle_type', function () {
+    let id = $(this).attr("data-id");
+
+    if (this.value === "owned") {
+        let fleetStr = `<select name="vehicle_number[]" class="vehicle_number form-control choices-select" data-id="${id}" required>
+                        <option value="">Select</option>`;
+
+        fleet.forEach(vehicle => {
+            fleetStr += `<option value="${vehicle.registration_number}">Reg# ${vehicle.registration_number}</option>`;
+        });
+
+        fleetStr += `</select>`;
+        $("#vehicle_number_" + id).html(fleetStr);
+
+        // Initialize Choices.js
+        new Choices(".choices-select", {
+            searchEnabled: true,
+            placeholder: true,
+            placeholderValue: "Select Vehicle",
+            itemSelectText: ""
+        });
+
     } else {
-        $("#vehicle_number_"+id).html('<td><input name="vehicle_number[]" class="form-control" placeholder="Vehicle #" required/></td>')
+        $("#vehicle_number_" + id).html(
+            `<input name="vehicle_number[]" class="form-control" placeholder="Vehicle #" required/>`
+        );
     }
 });
 
-$(".view-details").on('click', function(event){
 
-    id = $(this).attr("data-id");
+$(".view-details").on('click', function (event) {
+    let id = $(this).attr("data-id");
 
-    $("#containers_table_body").html("")
-    $("#booking_number").html(""+id)
+    $("#containers_table_body").html("");
+    $("#booking_number").html("" + id);
 
-    url = "<?= url("/jobs/edit/0/performance/containers/") ?>/"+id
-    console.log(url)
+    let url = "<?= url('/jobs/edit/0/performance/containers/') ?>/" + id;
+    console.log(url);
+
     $.ajax({
         url: url,
         type: 'GET',
         contentType: 'json',
-        success: function(json) {
-            
-            str = ""
-            for(i=0; i<json.data.containers.length; i++) {
+        success: function (json) {
+            let str = "";
+            json.data.containers.forEach(c => {
+                str += `<tr>
+                            <td>${c.container_no || ""}<input type="hidden" name="container_ids[]" value="${c.id}" /></td>
+                            <td>${c.open_cargo_status.toUpperCase()}</td>
+                            <td>${c.size}</td>
+                            <td>${c.status}</td>
+                            <td>${c.date}</td>
+                            <td>${c.loading_port}</td>
+                            <td>${c.off_loading_port}</td>
+                            <td>${c.container_weight || ""}</td>
+                            <td>${c.cross_stuffing_status ? c.cross_stuffing_status.toUpperCase() : ""}</td>
+                            <td>${c.detention_start_date || ""}</td>`;
 
-                str += "<tr>"
-                c = json.data.containers[i]
+                if ((c.cross_stuffing_status || "").toLowerCase() === "yes") {
+                    str += `<td><input value="${c.cross_stuffing_container_no || ""}" type="text" name="cross_stuffing_container_no[]" class="form-control" placeholder="Container #" pattern="^[A-Za-z]{4}[0-9]{7}$" title="Container ID must be 4 letters followed by 9 numbers with no spaces." required></td>`;
+                } else {
+                    str += `<td><input type="hidden" name="cross_stuffing_container_no[]" value="--"/></td>`;
+                }
 
-                str += c.container_no ? "<td>"+c.container_no+'<input type="hidden" name="container_ids[]" value="'+ c.id +'"/></td>': "<td></td>"
-                str += "<td>"+ c.open_cargo_status.toUpperCase()+"</td>"
-                str += "<td>"+c.size+"</td>"
-                str += "<td>"+c.status+"</td>"
-                str += "<td>"+c.date+"</td>"
-                str += "<td>"+c.loading_port+"</td>"
-                str += "<td>"+c.off_loading_port+"</td>"
-                if(c.container_weight == null){
-                    str += "<td></td>"
-                } else {
-                    str += "<td>"+c.container_weight+"</td>"
-                }
-                if(c.cross_stuffing_status == null){
-                    str += "<td></td>"
-                } else {
-                    str += "<td>"+c.cross_stuffing_status.toUpperCase()+"</td>"
-                }
-                if(c.detention_start_date == null){
-                    str += "<td></td>"
-                } else {
-                    str += "<td>"+c.detention_start_date+"</td>"
-                }
-                if(c.cross_stuffing_status.toLowerCase() == "yes") {
-                    str += '<td><input value="'+(c.cross_stuffing_container_no == null ? "" : c.cross_stuffing_container_no)+'" type="text" name="cross_stuffing_container_no[]" class="form-control" placeholder="Container #" pattern="^[A-Za-z]{4}[0-9]{7}$" title="Container ID must be 4 letters followed by 9 numbers with no spaces." required></td>'
-                } else {
-                    str += '<td><input type="hidden" name="cross_stuffing_container_no[]" value="--"/></td>'
-                }
-                str += '<td style="width: 150px">'+
-                            '<select name="vehicle_type[]" class="vehicle_type form-control" data-id="'+ c.id +'" required>'+
-                                '<option value="">Select</option>'+
-                                '<option value="owned">Owned</option>'+
-                                '<option value="private">Private</option>'+
-                            '</select>'+
-                        "</td>"
-                str += '<td id="vehicle_number_'+c.id+'" style="width: 150px"></td>'
-                str += "</tr>"
+                str += `<td style="min-width: 200px">
+                            <select name="vehicle_type[]" class="vehicle_type form-control" data-id="${c.id}" required>
+                                <option value="">Select</option>
+                                <option value="owned">Owned</option>
+                                <option value="private">Private</option>
+                            </select>
+                        </td>
+                        <td id="vehicle_number_${c.id}" style="width: 200px"></td>
+                    </tr>`;
+            });
 
-            }
+            let oldAction = document.getElementById("update_containers").action;
+            let arr = oldAction.split("/");
+            arr[arr.length - 1] = id;
+            document.getElementById("update_containers").action = arr.join("/");
 
-            oldAction = document.getElementById("update_containers").action;
-            arr = oldAction.split("/")
-            arr[arr.length - 1] = id
-            document.getElementById("update_containers").action = arr.join("/")
-            if(json.data.containers.length <= 0) {
-                $("#containers_table_body").html('<tr><td colspan="12"><label>No pending containers found ... </label></td></tr>')
-                $('#containers-modal-footer').hide()
+            if (json.data.containers.length <= 0) {
+                $("#containers_table_body").html('<tr><td colspan="12"><label>No pending containers found ... </label></td></tr>');
+                $('#containers-modal-footer').hide();
             } else {
-                $("#containers_table_body").html(str)
-                $('#containers-modal-footer').show()
+                $("#containers_table_body").html(str);
+                $('#containers-modal-footer').show();
             }
-
         },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown)
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
         },
     });
-
 });
 
 </script>
