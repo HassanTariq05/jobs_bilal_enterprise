@@ -16,7 +16,7 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-hover table-striped table-sm" id="table-1">
+                    <table class="table data-table table-hover table-striped table-sm" id="table-1">
                             <thead>
                                 <tr>
                                     <th width="100" class="text-center">#</th>
